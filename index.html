@@ -1,125 +1,154 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Malcolm Soto – AWS Consultant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – AWS Cloud Consultant</title>
   <style>
     :root {
-      --bg-light: #f9f9f9;
-      --text-light: #111;
-      --bg-dark: #1b1f23;
-      --text-dark: #f1f1f1;
-      --accent: #1e90ff;
-    }
-
-    [data-theme="light"] {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    [data-theme="dark"] {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
     }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      transition: background 0.3s, color 0.3s;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
       text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
     }
 
-    header {
-      padding: 60px 20px 20px;
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     h1 {
-      font-size: 2.8em;
-      margin: 0;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
 
     h2 {
-      font-weight: 300;
-      color: var(--accent);
-      margin-top: 10px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
 
-    section {
-      max-width: 800px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .cta {
-      background-color: var(--accent);
-      padding: 12px 30px;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 1em;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 30px;
-    }
-
-    .toggle-theme {
-      margin-top: 20px;
-      cursor: pointer;
-      background: none;
-      border: 1px solid var(--accent);
-      padding: 8px 16px;
-      border-radius: 5px;
-      color: inherit;
-      font-size: 0.9em;
-    }
-
-    footer {
-      padding: 30px 20px;
-      font-size: 0.85em;
-      opacity: 0.8;
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
     }
 
     a {
-      color: var(--accent);
+      color: var(--button-light);
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.8rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Malcolm Soto</h1>
-    <h2>AWS Cloud Consultant & DevOps Problem Solver</h2>
-  </header>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
 
-  <section>
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+
+  <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <main>
+    <h1>Malcolm Soto</h1>
+    <h2 style="color: #1e90ff;">AWS Cloud Consultant & DevOps Problem Solver</h2>
+
     <p>
       I help businesses unlock the full potential of AWS by building scalable, secure, and cost-effective cloud environments.
       From EC2 to S3, IAM, Terraform, and VPC automation — I bring clarity and action to your cloud goals.
     </p>
+
     <p>
       Let’s design, optimize, or troubleshoot your AWS environment — with speed and precision. Thank You.
     </p>
-    <a class="cta" href="mailto:malcolmittech@gmail.com">Contact Me</a><br/><br/>
-    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank">Connect on LinkedIn</a><br/>
-    <button class="toggle-theme" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
-  </section>
 
-  <footer>
-    &copy; 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX<br/>
-    Hosted in: <strong>us-east-1</strong> (Amazon S3 Static Website Hosting)
-  </footer>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact Me</a><br />
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" style="display: block; margin-top: 0.5rem;">Connect on LinkedIn</a>
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute("data-theme");
-      html.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
-    }
-  </script>
+    <!-- ✅ My Certifications Section -->
+    <section style="margin-top: 4rem;">
+      <h2>🎖️ My Certifications</h2>
+      <p>These badges are issued by Credly and verify my AWS & cloud skills.</p>
+      <div style="margin-top: 2rem;">
+        <a href="https://www.credly.com/users/malcolmsoto/badges" target="_blank" class="button">
+          View My Badges
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+      <p>Hosted in: <strong>us-east-1</strong> (Amazon S3 Static Website Hosting)</p>
+    </footer>
+  </main>
 </body>
 </html>
