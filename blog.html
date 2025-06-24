@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malcolm Soto – AWS Cloud Consultant</title>
+  <title>Malcolm Soto – Blog</title>
   <style>
     :root {
       --bg-light: #ffffff;
@@ -33,11 +33,6 @@
     h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
     }
 
     p {
@@ -86,18 +81,26 @@
       color: inherit;
     }
 
+    article {
+      max-width: 700px;
+      margin: 2rem auto;
+      text-align: left;
+    }
+
+    article h3 {
+      margin-bottom: 0.2rem;
+    }
+
+    article p.meta {
+      margin: 0;
+      color: gray;
+      font-size: 0.9rem;
+    }
+
     footer {
       font-size: 0.85rem;
       margin-top: 4rem;
       color: gray;
-    }
-
-    @media (max-width: 600px) {
-      .toggle {
-        top: 0.75rem;
-        right: 0.75rem;
-        font-size: 0.8rem;
-      }
     }
   </style>
 </head>
@@ -119,34 +122,42 @@
   <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
 
   <main>
-    <h1>Malcolm Soto</h1>
-    <h2 style="color: #1e90ff;">AWS Cloud Consultant & DevOps Problem Solver</h2>
+    <h1>📝 Blog</h1>
+    <p>Thoughts, tutorials, and tips from Malcolm Soto</p>
 
-    <p>
-      I help businesses unlock the full potential of AWS by building scalable, secure, and cost-effective cloud environments.
-      From EC2 to S3, IAM, Terraform, and VPC automation — I bring clarity and action to your cloud goals.
-    </p>
-
-    <p>
-      Let’s design, optimize, or troubleshoot your AWS environment — with speed and precision. Thank You.
-    </p>
-
-    <a href="mailto:malcolmittech@gmail.com" class="button">Contact Me</a><br />
-    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" style="display: block; margin-top: 0.5rem;">Connect on LinkedIn</a>
-
-    <!-- ✅ Blog Link Above Certifications -->
-    <div style="margin-top: 4rem;">
-      <a href="blog.html" class="button">Visit My Blog</a>
-    </div>
-
-    <!-- ✅ My Certifications Section -->
-    <section style="margin-top: 4rem;">
-      <h2>🎖️ My Certifications</h2>
-      <p>These badges are issued by Credly and verify my AWS & cloud skills.</p>
-      <div style="margin-top: 2rem;">
-        <a href="https://www.credly.com/users/malcolmsoto/badges" target="_blank" class="button">
-          View My Badges
+    <article>
+      <h3>
+        <a href="https://medium.com/@malcolm.soto/hosting-a-static-website-on-aws-s3-3ab1c11fa0fa" target="_blank">
+          Hosting a Static Website on AWS S3
         </a>
+      </h3>
+      <p class="meta">Published on Medium</p>
+      <p>Learn how I deployed this site using S3, CloudFront, and Route 53 with HTTPS and scalability in mind.</p>
+    </article>
+
+    <article>
+      <h3>
+        <a href="https://medium.com/@malcolm.soto/setting-up-terraform-with-proxmox-my-experience-5e88ef23323d" target="_blank">
+          Setting Up Terraform with Proxmox: My Experience
+        </a>
+      </h3>
+      <p class="meta">Published on Medium</p>
+      <p>A walkthrough of using Infrastructure as Code to provision and manage Proxmox VMs with Terraform.</p>
+    </article>
+
+    <article>
+      <h3>
+        <a href="https://medium.com/@malcolm.soto/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way-ecc1ec63196d" target="_blank">
+          How to Join Two Proxmox Servers into a Cluster the Manual Way
+        </a>
+      </h3>
+      <p class="meta">Published on Medium</p>
+      <p>A manual method to join two Proxmox nodes into a cluster — tested and simple.</p>
+    </article>
+
+    <a href="index.html" class="button">← Back to Home</a>
+  </main>
+
     <footer>
       <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
       <p>Hosted in: <strong>AWS CloudFront</strong> </p>
