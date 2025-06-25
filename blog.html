@@ -125,6 +125,16 @@
     <h1>📝 Blog</h1>
     <p>Thoughts, tutorials, and tips from Malcolm Soto</p>
 
+        <article>
+      <h3>
+        <a href="https://medium.com/@malcolm.soto/aws-organization-setup-4c3bce45aeb5" target="_blank">
+          AWS Organization Setup
+        </a>
+      </h3>
+      <p class="meta">Published on Medium</p>
+      <p>AWS Organization Setup.</p>
+    </article>
+
     <article>
       <h3>
         <a href="https://medium.com/@malcolm.soto/hosting-a-static-website-on-aws-s3-3ab1c11fa0fa" target="_blank">
@@ -186,84 +196,3 @@
 </body>
 </html>
 
-<!-- Small fixed status button -->
-<button id="aws-status-button" 
-        style="
-          position: fixed;
-          bottom: 10px;
-          right: 10px;
-          padding: 6px 12px;
-          font-size: 12px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          background: #4caf50;
-          color: white;
-          z-index: 9999;
-        ">
-  AWS: UP
-</button>
-
-<!-- Hidden popup for details -->
-<div id="aws-status-popup" 
-     style="
-       display: none;
-       position: fixed;
-       bottom: 40px;
-       right: 10px;
-       width: 250px;
-       background: #fff;
-       border: 1px solid #ccc;
-       padding: 10px;
-       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-       font-size: 13px;
-       color: #333;
-       border-radius: 4px;
-       z-index: 10000;
-     ">
-  Loading AWS status...
-</div>
-
-<script>
-const button = document.getElementById('aws-status-button');
-const popup = document.getElementById('aws-status-popup');
-
-button.addEventListener('click', () => {
-  popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
-});
-
-async function fetchAWSStatus() {
-  const rssUrl = encodeURIComponent('https://status.aws.amazon.com/rss/all.rss');
-  const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
-
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
-    const latestItem = data.items[0];
-    const isDown = /disruption|issue|outage/i.test(latestItem.title);
-
-    if (isDown) {
-      button.style.background = '#ff4d4d';
-      button.textContent = 'AWS: DOWN';
-    } else {
-      button.style.background = '#4caf50';
-      button.textContent = 'AWS: UP';
-    }
-
-    const now = new Date();
-    popup.innerHTML = `
-      <strong>AWS Status:</strong> ${isDown ? 'DOWN' : 'UP'}<br>
-      <em>${latestItem.title}</em><br>
-      <small>Last updated: ${now.toLocaleString()}</small>
-    `;
-  } catch (err) {
-    button.style.background = '#888';
-    button.textContent = 'AWS: ?';
-    popup.innerHTML = 'Unable to fetch AWS status.';
-  }
-}
-
-fetchAWSStatus();
-setInterval(fetchAWSStatus, 5 * 60 * 1000);
-</script>
