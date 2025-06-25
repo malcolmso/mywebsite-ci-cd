@@ -13,6 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Replace email placeholder in HTML
+        run: |
+          sed -i "s|{{MYEMAIL}}|${{ secrets.MYEMAIL }}|g" index.html
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -23,4 +27,3 @@ jobs:
       - name: Sync to S3
         run: |
           aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --delete --exclude ".git/*" --exclude ".github/*"
-#
