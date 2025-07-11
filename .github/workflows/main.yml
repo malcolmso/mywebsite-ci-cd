@@ -35,9 +35,3 @@ jobs:
 
       - name: 🚀 Sync to S3
         run: aws s3 sync _site/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
-
-      - name: 🔄 Invalidate CloudFront
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id E22WJUIINJNQIG \
-            --paths "/blog/*"
