@@ -1,10 +1,21 @@
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
-.jekyll-cache/
+# Node modules, just in case
+node_modules/
+
+# OS junk
 .DS_Store
-.env
-*.log
+Thumbs.db
+
+# AWS credential files if present
+*.tfvars
 *.pem
-assets/images/favicon.ico
+
+# Temp / debug / backup files
+*.log
+*.bak
+*.tmp
+
+# Powershell history or PS temp files
+*.ps1~
+
+# Your GitHub Action log (if generated)
+action.log

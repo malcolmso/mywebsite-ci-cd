@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Hosting a Static Website on S3</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    p, ol {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+      text-align: left;
+    }
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    img {
+      width: 100%;
+      max-width: 700px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 1rem auto;
+      display: block;
+    }
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+
+  <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+    <h1>🌐 Hosting a Static Website on AWS S3</h1>
+    <p>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static site with just a few steps.</p>
+
+    <h2>Step 1: Clone My Git Repo</h2>
+    <p>Grab the sample files from my GitHub:</p>
+    <code>git clone https://github.com/malcolmso/aws</code>
+
+    <h2>Step 2: Create an S3 Bucket</h2>
+    <ol>
+      <li>Log in to your AWS Console.</li>
+      <li>Navigate to S3 and click “Create Bucket.”</li>
+      <li>Provide a unique bucket name.</li>
+      <li>Select a region and adjust settings as needed.</li>
+      <li>Click “Create Bucket.”</li>
+    </ol>
+
+    <h2>Step 3: Upload Your HTML Files</h2>
+    <ol>
+      <li>Open the bucket.</li>
+      <li>Click “Upload” and add <code>index.html</code> and <code>error.html</code>.</li>
+      <li>Click “Upload” to confirm.</li>
+    </ol>
+
+    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/1.png" alt="Upload HTML files to S3" />
+
+    <h2>Step 4: Enable Static Website Hosting</h2>
+    <ol>
+      <li>Go to the Properties tab of your bucket.</li>
+      <li>Scroll to Static Website Hosting → Edit.</li>
+      <li>Enable hosting and set:
+        <br/>Index Document: <code>index.html</code>
+        <br/>Error Document: <code>error.html</code>
+      </li>
+      <li>Click “Save.”</li>
+      <li>Note the Bucket Website Endpoint:
+        <br/><code>http://your-bucket-name.s3-website-us-east-1.amazonaws.com/</code>
+      </li>
+    </ol>
+
+    <h2>Step 5: Update Bucket Permissions</h2>
+    <ol>
+      <li>Go to the Permissions tab → Bucket Policy → Edit.</li>
+      <li>Copy your Bucket ARN:
+        <br/><code>arn:aws:s3:::your-bucket-name</code>
+      </li>
+      <li>Use the AWS Policy Generator:
+        <ul>
+          <li>Policy Type: S3 Bucket Policy</li>
+          <li>Effect: Allow</li>
+          <li>Principal: <code>*</code></li>
+          <li>Action: <code>s3:GetObject</code></li>
+          <li>ARN: <code>arn:aws:s3:::your-bucket-name/*</code></li>
+        </ul>
+      </li>
+      <li>Click Add Statement → Generate Policy.</li>
+      <li>Paste it into the Bucket Policy editor → Save.</li>
+    </ol>
+
+    <h2>Step 6: Test the Website</h2>
+    <p>Open the URL in your browser and confirm the site loads correctly 🎉</p>
+
+    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/2.png" alt="Static hosting configuration" />
+    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/3.png" alt="Bucket policy setup" />
+  </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
+</body>
+</html>

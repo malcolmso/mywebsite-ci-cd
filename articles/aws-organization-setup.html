@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malcolm Soto – Blog</title>
+  <title>Malcolm Soto – Article</title>
   <style>
     :root {
       --bg-light: #ffffff;
@@ -13,7 +13,6 @@
       --button-light: #1e90ff;
       --button-dark: #4c9aff;
     }
-
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
@@ -24,36 +23,25 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-
     [data-theme="dark"] body {
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h3 {
-      margin-bottom: 0.3rem;
-    }
-
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
     p {
       max-width: 700px;
       margin: 0 auto 1rem auto;
       line-height: 1.6;
     }
-
     a {
       color: var(--button-light);
       text-decoration: none;
     }
-
     [data-theme="dark"] a {
       color: var(--button-dark);
     }
-
     .button {
       display: inline-block;
       margin-top: 1rem;
@@ -66,12 +54,10 @@
       cursor: pointer;
       text-decoration: none;
     }
-
     [data-theme="dark"] .button {
       background-color: var(--button-dark);
       color: white;
     }
-
     .toggle {
       position: absolute;
       top: 1rem;
@@ -84,7 +70,6 @@
       cursor: pointer;
       color: inherit;
     }
-
     nav {
       display: flex;
       justify-content: center;
@@ -92,25 +77,11 @@
       gap: 1rem;
       margin-bottom: 2rem;
     }
-
-    section {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    article {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 1rem;
-    }
-
     footer {
       font-size: 0.85rem;
       margin-top: 4rem;
       color: gray;
     }
-
     @media (max-width: 600px) {
       .toggle {
         top: 0.75rem;
@@ -128,7 +99,6 @@
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
     };
-
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
@@ -137,54 +107,35 @@
 
   <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
 
-  <!-- 🧭 Navigation Bar -->
   <nav>
-    <a href="index.html" class="button">Home</a>
-    <a href="blog.html" class="button">Blog</a>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
     <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
   <main>
-    <h1>📝 Blog</h1>
-    <p>Hands-on fixes, walkthroughs, and AWS insights.</p>
+    <h1>🏢 AWS Organization Setup</h1>
+    <p>This guide walks you through setting up an AWS Organization using the root management account. It's a great way to centralize account management and implement policies across teams.</p>
 
-    <section>
-      <article>
-        <h3><a href="articles/cloudfront-invalidation.html">✅ AWS CloudFront Invalidation</a></h3>
-        <p>How to invalidate cached content in CloudFront using the AWS CLI and avoid stale assets during deployment.</p>
-      </article>
+    <h2>Steps to Set Up</h2>
+    <ol style="max-width: 700px; margin: 0 auto; text-align: left;">
+      <li>Sign in as the root user to the AWS account you want to use as the management account.</li>
+      <li>Go to <a href="https://console.aws.amazon.com/organizations" target="_blank">AWS Organizations</a>.</li>
+      <li>Click <strong>Create an organization</strong>.</li>
+    </ol>
 
-      <article>
-        <h3><a href="articles/aws-organization-setup.html">🏢 AWS Organization Setup</a></h3>
-        <p>Step-by-step guide to creating an AWS Organization, setting up Service Control Policies, and managing accounts.</p>
-      </article>
+    <h2>Screenshots</h2>
+    <div style="max-width: 700px; margin: 0 auto;">
+      <img src="../assets/images/AWS-Organization-Setup/1.png" alt="Step 1" style="width:100%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;" />
+      <img src="../assets/images/AWS-Organization-Setup/2.png" alt="Step 2" style="width:100%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;" />
+      <img src="../assets/images/AWS-Organization-Setup/3.png" alt="Step 3" style="width:100%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;" />
+      <img src="../assets/images/AWS-Organization-Setup/4.png" alt="Step 4" style="width:100%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;" />
+      <img src="../assets/images/AWS-Organization-Setup/5.png" alt="Step 5" style="width:100%; border: 1px solid #ccc; border-radius: 6px; margin-bottom: 1rem;" />
+    </div>
 
-      <article>
-        <h3><a href="articles/get-rid-of-the-microsoft-edge-browser-startup-age.html">🧼 Remove Edge Startup Page</a></h3>
-        <p>Disable Microsoft Edge’s default startup behavior using Group Policy and registry tweaks.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/hosting-a-static-website-on-s3.html">🌐 Host Static Site on S3</a></h3>
-        <p>How to deploy a static website to AWS S3 with CloudFront, custom domain, and HTTPS support.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html">🖧 Join Proxmox Cluster (Manual)</a></h3>
-        <p>Manual method for joining two Proxmox nodes into a cluster without relying on automatic discovery.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/setting-up-terraform-with-proxmox-my-experience.html">⚙️ Terraform with Proxmox</a></h3>
-        <p>My experience setting up Terraform to manage Proxmox VMs and automate infrastructure provisioning.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/windows-default-app-associations-gpo.html">🪟 Default App Associations via GPO</a></h3>
-        <p>Configure default app associations in Windows using Group Policy and XML mapping for enterprise environments.</p>
-      </article>
-    </section>
+    <h2>✅ Done</h2>
+    <p>Once complete, you'll have a multi-account AWS Organization ready for centralized billing, policy enforcement, and account governance.</p>
   </main>
 
   <footer>

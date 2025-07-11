@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malcolm Soto – Blog</title>
+  <title>Malcolm Soto – Proxmox Cluster Setup</title>
   <style>
     :root {
       --bg-light: #ffffff;
@@ -13,7 +13,6 @@
       --button-light: #1e90ff;
       --button-dark: #4c9aff;
     }
-
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
@@ -24,36 +23,25 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-
     [data-theme="dark"] body {
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h3 {
-      margin-bottom: 0.3rem;
-    }
-
-    p {
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    p, ol {
       max-width: 700px;
       margin: 0 auto 1rem auto;
       line-height: 1.6;
+      text-align: left;
     }
-
     a {
       color: var(--button-light);
       text-decoration: none;
     }
-
     [data-theme="dark"] a {
       color: var(--button-dark);
     }
-
     .button {
       display: inline-block;
       margin-top: 1rem;
@@ -66,12 +54,10 @@
       cursor: pointer;
       text-decoration: none;
     }
-
     [data-theme="dark"] .button {
       background-color: var(--button-dark);
       color: white;
     }
-
     .toggle {
       position: absolute;
       top: 1rem;
@@ -84,7 +70,6 @@
       cursor: pointer;
       color: inherit;
     }
-
     nav {
       display: flex;
       justify-content: center;
@@ -92,25 +77,19 @@
       gap: 1rem;
       margin-bottom: 2rem;
     }
-
-    section {
+    img {
+      width: 100%;
       max-width: 700px;
-      margin: 0 auto;
-      text-align: left;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 1rem auto;
+      display: block;
     }
-
-    article {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 1rem;
-    }
-
     footer {
       font-size: 0.85rem;
       margin-top: 4rem;
       color: gray;
     }
-
     @media (max-width: 600px) {
       .toggle {
         top: 0.75rem;
@@ -128,7 +107,6 @@
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
     };
-
     window.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
@@ -137,54 +115,46 @@
 
   <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
 
-  <!-- 🧭 Navigation Bar -->
   <nav>
-    <a href="index.html" class="button">Home</a>
-    <a href="blog.html" class="button">Blog</a>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
     <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
   <main>
-    <h1>📝 Blog</h1>
-    <p>Hands-on fixes, walkthroughs, and AWS insights.</p>
+    <h1>🖧 Join Two Proxmox Servers into a Cluster</h1>
+    <p>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide walks you through setting up a two-node cluster manually with screenshots.</p>
 
-    <section>
-      <article>
-        <h3><a href="articles/cloudfront-invalidation.html">✅ AWS CloudFront Invalidation</a></h3>
-        <p>How to invalidate cached content in CloudFront using the AWS CLI and avoid stale assets during deployment.</p>
-      </article>
+    <h2>📋 Prerequisites</h2>
+    <ul style="max-width: 700px; margin: 0 auto; text-align: left;">
+      <li>Two or more Proxmox VE servers with static IP addresses</li>
+      <li>Root privileges</li>
+    </ul>
 
-      <article>
-        <h3><a href="articles/aws-organization-setup.html">🏢 AWS Organization Setup</a></h3>
-        <p>Step-by-step guide to creating an AWS Organization, setting up Service Control Policies, and managing accounts.</p>
-      </article>
+    <h2>🛠️ Steps to Join</h2>
+    <ol>
+      <li>On Server 1, navigate to <strong>Datacenter → Cluster</strong>.</li>
+      <li>Click <strong>Create Cluster</strong>, give it a name, and click <strong>Create</strong>.</li>
+    </ol>
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/1.png" alt="Create cluster step 1" />
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/2.png" alt="Cluster creation in progress" />
 
-      <article>
-        <h3><a href="articles/get-rid-of-the-microsoft-edge-browser-startup-age.html">🧼 Remove Edge Startup Page</a></h3>
-        <p>Disable Microsoft Edge’s default startup behavior using Group Policy and registry tweaks.</p>
-      </article>
+    <ol start="3">
+      <li>Click <strong>Join Information</strong> to see the cluster join details.</li>
+    </ol>
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/3.png" alt="Join Information screen" />
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/4.png" alt="Copy join details" />
 
-      <article>
-        <h3><a href="articles/hosting-a-static-website-on-s3.html">🌐 Host Static Site on S3</a></h3>
-        <p>How to deploy a static website to AWS S3 with CloudFront, custom domain, and HTTPS support.</p>
-      </article>
+    <ol start="4">
+      <li>On Server 2, go to <strong>Datacenter → Cluster → Join Cluster</strong>.</li>
+      <li>Paste the details and click <strong>Join</strong>.</li>
+    </ol>
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/5.png" alt="Join cluster on second server" />
 
-      <article>
-        <h3><a href="articles/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html">🖧 Join Proxmox Cluster (Manual)</a></h3>
-        <p>Manual method for joining two Proxmox nodes into a cluster without relying on automatic discovery.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/setting-up-terraform-with-proxmox-my-experience.html">⚙️ Terraform with Proxmox</a></h3>
-        <p>My experience setting up Terraform to manage Proxmox VMs and automate infrastructure provisioning.</p>
-      </article>
-
-      <article>
-        <h3><a href="articles/windows-default-app-associations-gpo.html">🪟 Default App Associations via GPO</a></h3>
-        <p>Configure default app associations in Windows using Group Policy and XML mapping for enterprise environments.</p>
-      </article>
-    </section>
+    <h2>✅ Cluster Ready</h2>
+    <p>Once complete, both servers should appear in the cluster view and can participate in HA tasks, shared storage, and fencing actions.</p>
+    <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/6.png" alt="Cluster setup complete" />
   </main>
 
   <footer>
