@@ -29,6 +29,19 @@
       color: var(--text-dark);
     }
 
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+
     .button {
       display: inline-block;
       margin-top: 1rem;
@@ -54,61 +67,36 @@
       margin-bottom: 2rem;
     }
 
-    .toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      padding: 0.5rem 0.9rem;
-      font-size: 0.9rem;
-      background: transparent;
-      border: 2px solid #ccc;
-      border-radius: 6px;
-      cursor: pointer;
-      color: inherit;
-    }
-
-    .container {
+    main {
       max-width: 700px;
       margin: 0 auto;
       text-align: left;
     }
 
-    footer {
-      font-size: 0.85rem;
-      margin-top: 4rem;
+    article {
+      margin-bottom: 2.5rem;
+    }
+
+    article h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    article .meta {
+      font-size: 0.9rem;
       color: gray;
-      text-align: center;
+      margin-bottom: 0.5rem;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 2rem 0;
-    }
-
-    li {
-      margin-bottom: 2rem;
+    article p {
       line-height: 1.6;
     }
 
-    li a {
-      font-size: 1.2rem;
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.4rem;
-      color: var(--button-light);
-      text-decoration: none;
-    }
-
-    [data-theme="dark"] li a {
-      color: var(--button-dark);
-    }
-
-    li span {
-      font-size: 0.9rem;
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      text-align: center;
       color: gray;
-      display: block;
-      margin-top: 0.2rem;
     }
   </style>
 </head>
@@ -129,16 +117,17 @@
   <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
 
   <nav>
-    <a href="/" class="button">Home</a>
+    <a href="{{ '/' | relative_url }}" class="button">Home</a>
     <a href="/blog/" class="button">Blog</a>
     <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
   <main>
-    <div class="container">
-      {{ content }}
-    </div>
+    <h1>📝 Blog</h1>
+    <p>Thoughts, tutorials, and tips from Malcolm Soto</p>
+
+    {{ content }}
   </main>
 
   <footer>
