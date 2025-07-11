@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hosting a Static Website on AWS S3</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+
+  <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <nav>
+    <a href="/" class="button">Home</a>
+    <a href="/blog/" class="button">Blog</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+    <div class="container">
+      <p>Hosting a Static Website on AWS S3</p>
+
+<p>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static website using AWS S3.</p>
+
+<p>Step 1: Clone my Git Repo</p>
+
+<p>Start by downloading the required HTML files (index.html and error.html) from your repository:</p>
+
+<p>git clone https://github.com/malcolmso/aws</p>
+
+<p>Step 2: Create an S3 Bucket</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Log in to your AWS Management Console.
+2. Navigate to S3 and click Create Bucket.
+3. Provide a unique bucket name.
+4. Choose a region and configure other settings as needed.
+5. Click Create Bucket.
+</code></pre></div></div>
+
+<p>Step 3: Upload HTML Files</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Open your newly created S3 bucket.
+2. Click Upload and add the index.html and error.html files.
+3. Click Upload to confirm.
+</code></pre></div></div>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p>Step 4: Enable Static Website Hosting</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Navigate to the Properties tab of your bucket.
+2. Scroll down to Static Website Hosting and click Edit.
+3. Select Enable and enter:
+
+Index Document: index.html
+Error Document: error.html
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Click Save.</p>
+  </li>
+  <li>
+    <p>Note the Bucket Website Endpoint
+example= http://bucket-name.s3-website-us-east-1.amazonaws.com/</p>
+  </li>
+</ol>
+
+<p>Step 5: Update Bucket Permissions</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Go to the Permissions tab of your bucket.
+2. Click Edit under Bucket Policy.
+3. Copy your Bucket ARN (example = arn:aws:s3:::your-bucket-name).
+4. Use the AWS Policy Generator to create a policy:
+
+Policy Type: S3 Bucket Policy
+Effect: Allow
+Principal: * (public access)
+Actions: s3:GetObject
+ARN: arn:aws:s3:::your-bucket-name/*
+</code></pre></div></div>
+
+<p>Do not forget to put the * at the end !!</p>
+
+<ol>
+  <li>
+    <p>Click Add Statement and Generate Policy.</p>
+  </li>
+  <li>
+    <p>Copy the generated policy and paste it into the Bucket Policy Editor.</p>
+  </li>
+  <li>
+    <p>Click Save Changes.</p>
+  </li>
+</ol>
+
+<p>Step 6: Test Your Website</p>
+
+<p>Access your static website using the URL provided in the Bucket Website Endpoint.</p>
+
+<p>Your AWS S3 static website is now live! 🎉</p>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/3.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
+</body>
+</html>

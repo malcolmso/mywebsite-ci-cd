@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Join Two Proxmox Servers into a Cluster the manual way</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+
+  <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <nav>
+    <a href="/" class="button">Home</a>
+    <a href="/blog/" class="button">Blog</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+    <div class="container">
+      <p>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide will show you how to set up a two-node Proxmox cluster step by step.</p>
+
+<p>Prerequisites:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Two or more Proxmox VE servers with static IP address
+Root privileges
+</code></pre></div></div>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/1.png" alt="CloudFront Invalidation Flowchart" /><br />
+Click on Datacenter &gt; Cluster &gt; Create Cluster &gt; Give it a name, then click Create</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/2.png" alt="CloudFront Invalidation Flowchart" /><br />
+It will start to Create the Cluster</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/3.png" alt="CloudFront Invalidation Flowchart" /><br />
+Click Join Information</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/4.png" alt="CloudFront Invalidation Flowchart" /><br />
+Copy the details</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/5.png" alt="CloudFront Invalidation Flowchart" /><br />
+On the Second server, click Datacenter&gt; Cluster&gt; Join Cluster, enter the information, then click Join.</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/6.png" alt="CloudFront Invalidation Flowchart" /><br />
+The Servers are now in a Cluster, now you can perform HA actions.</p>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
+</body>
+</html>

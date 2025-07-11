@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-07-11T08:41:19-05:00</updated><id>/feed.xml</id><entry><title type="html">Windows Default app associations GPO</title><link href="/aws/2025/07/07/windows-default-app-associations-gpo.html" rel="alternate" type="text/html" title="Windows Default app associations GPO" /><published>2025-07-07T00:00:00-05:00</published><updated>2025-07-07T00:00:00-05:00</updated><id>/aws/2025/07/07/windows-default-app-associations-gpo</id><content type="html" xml:base="/aws/2025/07/07/windows-default-app-associations-gpo.html"><![CDATA[<p>Windows Default app associations GPO</p>
+
+<p>Grab the defaults app associations on a windows computer you want to be the standard.</p>
+
+<p>Run the command below in CMD (as admin) to grab the AppAssociations.xml file</p>
+
+<p>Dism /Online /Export-DefaultAppAssociations:”C:\AppAssociations.xml”</p>
+
+<p>Place this file on a Server Share.</p>
+
+<p>In the DC:</p>
+<ol>
+  <li>Open the Group Policy editor and go to the Computer Configuration\Administrative Templates\Windows Components\File Explorer.</li>
+  <li>Select Set a default associations configuration file.</li>
+  <li>Click policy setting, and then click Enabled.</li>
+  <li>Under Options:, type the location to your default associations configuration file.</li>
+  <li>Click OK to save the policy settings.</li>
+</ol>
+
+<p>As test, i changed the default app associations to random apps, run gpupdate /force, log off/in and the Apps associations changed to what I selected</p>
+
+<p>ref:
+https://lnkd.in/gN3ZH_FN</p>
+
+<p>Ref:
+https://lnkd.in/giFhrsvn</p>
+
+<p><img src="/assets/images/Windows-Default-app-associations-GPO/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Windows-Default-app-associations-GPO/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Windows-Default-app-associations-GPO/3.png" alt="CloudFront Invalidation Flowchart" /></p>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[Windows Default app associations GPO]]></summary></entry><entry><title type="html">Setting Up Terraform with Proxmox My Experience</title><link href="/aws/2025/07/06/setting-up-terraform-with-proxmox-my-experience.html" rel="alternate" type="text/html" title="Setting Up Terraform with Proxmox My Experience" /><published>2025-07-06T00:00:00-05:00</published><updated>2025-07-06T00:00:00-05:00</updated><id>/aws/2025/07/06/setting-up-terraform-with-proxmox-my-experience</id><content type="html" xml:base="/aws/2025/07/06/setting-up-terraform-with-proxmox-my-experience.html"><![CDATA[<p>When I first started using Terraform to manage Proxmox, I had to go through a few steps to get everything running smoothly. Here’s my setup process to help others who might be doing the same.
+Step 1: Create an API Key in Proxmox</p>
+
+<p>To allow Terraform to interact with Proxmox, I needed to create an API key.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Go to Datacenter &gt; Permissions &gt; API Tokens in the Proxmox web UI.
+2. Create a new API token for your user.
+3 Assign the necessary permissions (typically PVEAdmin for full control or PVESysAdmin for system-level access).
+4. Copy the generated token and store it securely.
+</code></pre></div></div>
+
+<p><img src="/assets/images/Setting-Up-Terraform-with-Proxmox-My-Experience/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Setting-Up-Terraform-with-Proxmox-My-Experience/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Step 2: Save the API Key in credentials.auto.tfvars
+</code></pre></div></div>
+
+<p>Next, I configured my Terraform provider to use the API key.</p>
+
+<p>In my credentials.auto.tfvars file, I included:</p>
+
+<p><img src="/assets/images/Setting-Up-Terraform-with-Proxmox-My-Experience/3.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Setting-Up-Terraform-with-Proxmox-My-Experience/4.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p>Do not share or expose your API keys to the world! This is just a home lab, Keys have been changed since posting this.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Step 3: Use My Template Repository
+</code></pre></div></div>
+
+<p>To simplify the setup, I used a predefined template from my GitHub repository: https://github.com/malcolmso/Proxmox-Terraform</p>
+
+<p>This template is used to clone a VM.
+You can modify to what you would like to do.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Clone the repository:
+
+git clone https://github.com/malcolmso/Proxmox-Terraform.git cd Proxmox-Terraform
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Update the variables in credentials.auto.tfvars with your Proxmox API credentials and settings.</p>
+  </li>
+  <li>
+    <p>Initialize Terraform:</p>
+
+    <p>terraform init</p>
+  </li>
+  <li>
+    <p>Plan the configuration:</p>
+  </li>
+</ol>
+
+<p>terraform plan -var-file=”credentials.auto.tfvars”</p>
+
+<ol>
+  <li>
+    <p>Apply the configuration with auto approve:</p>
+
+    <p>terraform apply -var-file=”credentials.auto.tfvars” -auto-approve</p>
+  </li>
+</ol>
+
+<p>Final Thoughts</p>
+
+<p>This setup helped me automate VM provisioning in Proxmox using Terraform.</p>
+
+<p>By leveraging API keys and a well-structured Terraform configuration, I was able to streamline my workflow.</p>
+
+<p>If you’re setting up Terraform with Proxmox, I highly recommend starting with my template and customizing it to fit your needs.</p>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[When I first started using Terraform to manage Proxmox, I had to go through a few steps to get everything running smoothly. Here’s my setup process to help others who might be doing the same. Step 1: Create an API Key in Proxmox]]></summary></entry><entry><title type="html">How to Join Two Proxmox Servers into a Cluster the manual way</title><link href="/aws/2025/07/05/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html" rel="alternate" type="text/html" title="How to Join Two Proxmox Servers into a Cluster the manual way" /><published>2025-07-05T00:00:00-05:00</published><updated>2025-07-05T00:00:00-05:00</updated><id>/aws/2025/07/05/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way</id><content type="html" xml:base="/aws/2025/07/05/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html"><![CDATA[<p>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide will show you how to set up a two-node Proxmox cluster step by step.</p>
+
+<p>Prerequisites:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Two or more Proxmox VE servers with static IP address
+Root privileges
+</code></pre></div></div>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/1.png" alt="CloudFront Invalidation Flowchart" /><br />
+Click on Datacenter &gt; Cluster &gt; Create Cluster &gt; Give it a name, then click Create</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/2.png" alt="CloudFront Invalidation Flowchart" /><br />
+It will start to Create the Cluster</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/3.png" alt="CloudFront Invalidation Flowchart" /><br />
+Click Join Information</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/4.png" alt="CloudFront Invalidation Flowchart" /><br />
+Copy the details</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/5.png" alt="CloudFront Invalidation Flowchart" /><br />
+On the Second server, click Datacenter&gt; Cluster&gt; Join Cluster, enter the information, then click Join.</p>
+
+<p><img src="/assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/6.png" alt="CloudFront Invalidation Flowchart" /><br />
+The Servers are now in a Cluster, now you can perform HA actions.</p>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide will show you how to set up a two-node Proxmox cluster step by step.]]></summary></entry><entry><title type="html">Hosting a Static Website on AWS S3</title><link href="/aws/2025/07/04/hosting-a-static-website-on-s3.html" rel="alternate" type="text/html" title="Hosting a Static Website on AWS S3" /><published>2025-07-04T00:00:00-05:00</published><updated>2025-07-04T00:00:00-05:00</updated><id>/aws/2025/07/04/hosting-a-static-website-on-s3</id><content type="html" xml:base="/aws/2025/07/04/hosting-a-static-website-on-s3.html"><![CDATA[<p>Hosting a Static Website on AWS S3</p>
+
+<p>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static website using AWS S3.</p>
+
+<p>Step 1: Clone my Git Repo</p>
+
+<p>Start by downloading the required HTML files (index.html and error.html) from your repository:</p>
+
+<p>git clone https://github.com/malcolmso/aws</p>
+
+<p>Step 2: Create an S3 Bucket</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Log in to your AWS Management Console.
+2. Navigate to S3 and click Create Bucket.
+3. Provide a unique bucket name.
+4. Choose a region and configure other settings as needed.
+5. Click Create Bucket.
+</code></pre></div></div>
+
+<p>Step 3: Upload HTML Files</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Open your newly created S3 bucket.
+2. Click Upload and add the index.html and error.html files.
+3. Click Upload to confirm.
+</code></pre></div></div>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p>Step 4: Enable Static Website Hosting</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Navigate to the Properties tab of your bucket.
+2. Scroll down to Static Website Hosting and click Edit.
+3. Select Enable and enter:
+
+Index Document: index.html
+Error Document: error.html
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>Click Save.</p>
+  </li>
+  <li>
+    <p>Note the Bucket Website Endpoint
+example= http://bucket-name.s3-website-us-east-1.amazonaws.com/</p>
+  </li>
+</ol>
+
+<p>Step 5: Update Bucket Permissions</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Go to the Permissions tab of your bucket.
+2. Click Edit under Bucket Policy.
+3. Copy your Bucket ARN (example = arn:aws:s3:::your-bucket-name).
+4. Use the AWS Policy Generator to create a policy:
+
+Policy Type: S3 Bucket Policy
+Effect: Allow
+Principal: * (public access)
+Actions: s3:GetObject
+ARN: arn:aws:s3:::your-bucket-name/*
+</code></pre></div></div>
+
+<p>Do not forget to put the * at the end !!</p>
+
+<ol>
+  <li>
+    <p>Click Add Statement and Generate Policy.</p>
+  </li>
+  <li>
+    <p>Copy the generated policy and paste it into the Bucket Policy Editor.</p>
+  </li>
+  <li>
+    <p>Click Save Changes.</p>
+  </li>
+</ol>
+
+<p>Step 6: Test Your Website</p>
+
+<p>Access your static website using the URL provided in the Bucket Website Endpoint.</p>
+
+<p>Your AWS S3 static website is now live! 🎉</p>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Hosting-a-Static-Website-on-AWS-S3/3.png" alt="CloudFront Invalidation Flowchart" /></p>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[Hosting a Static Website on AWS S3]]></summary></entry><entry><title type="html">Get rid of the Microsoft Edge browser startup page</title><link href="/microsoft/2025/07/03/get-rid-of-the-microsoft-edge-browser-startup-age.html" rel="alternate" type="text/html" title="Get rid of the Microsoft Edge browser startup page" /><published>2025-07-03T00:00:00-05:00</published><updated>2025-07-03T00:00:00-05:00</updated><id>/microsoft/2025/07/03/get-rid-of-the-microsoft-edge-browser-startup-age</id><content type="html" xml:base="/microsoft/2025/07/03/get-rid-of-the-microsoft-edge-browser-startup-age.html"><![CDATA[<p>Want to get rid of the Microsoft Edge browser startup page?
+A simple Microsoft Edge Policy edit can fix it.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Download and install the Microsoft Edge administrative template into your DC
+2. Create and apply the new GPO
+3. Test with a new user login
+</code></pre></div></div>
+
+<p><img src="/assets/images/Get-rid-of-the-Microsoft-Edge-browser-startup-page/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Get-rid-of-the-Microsoft-Edge-browser-startup-page/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Get-rid-of-the-Microsoft-Edge-browser-startup-page/3.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/Get-rid-of-the-Microsoft-Edge-browser-startup-page/4.png" alt="CloudFront Invalidation Flowchart" /></p>]]></content><author><name></name></author><category term="Microsoft" /><summary type="html"><![CDATA[Want to get rid of the Microsoft Edge browser startup page? A simple Microsoft Edge Policy edit can fix it.]]></summary></entry><entry><title type="html">AWS CloudFront invalidation</title><link href="/aws/2025/07/02/cloudfront-invalidation.html" rel="alternate" type="text/html" title="AWS CloudFront invalidation" /><published>2025-07-02T00:00:00-05:00</published><updated>2025-07-02T00:00:00-05:00</updated><id>/aws/2025/07/02/cloudfront-invalidation</id><content type="html" xml:base="/aws/2025/07/02/cloudfront-invalidation.html"><![CDATA[<p>Doing a Cloud Front invalidation tells AWS to remove cached copies of specified files from the CDN Edge locations so that Cloud Front fetches the latest versions from your origin (like S3) on the next request.</p>
+
+<p>This is how you update files on the CDN before their normal TTL expires.</p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/3.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/4.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/5.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p>To View the TTL, go to Behaviors</p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/6.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/7.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-CloudFront-invalidation/8.png" alt="CloudFront Invalidation Flowchart" /></p>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[Doing a Cloud Front invalidation tells AWS to remove cached copies of specified files from the CDN Edge locations so that Cloud Front fetches the latest versions from your origin (like S3) on the next request.]]></summary></entry><entry><title type="html">AWS Organization Setup</title><link href="/aws/2025/07/01/aws-organization-setup.html" rel="alternate" type="text/html" title="AWS Organization Setup" /><published>2025-07-01T00:00:00-05:00</published><updated>2025-07-01T00:00:00-05:00</updated><id>/aws/2025/07/01/aws-organization-setup</id><content type="html" xml:base="/aws/2025/07/01/aws-organization-setup.html"><![CDATA[<p>Here are quick steps to set up an AWS Organization:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sign in as root to the AWS account you want to use as the management account.
+Go to AWS Organizations:
+https://console.aws.amazon.com/organizations
+Click “Create an organization”
+</code></pre></div></div>
+
+<p><img src="/assets/images/AWS-Organization-Setup/1.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-Organization-Setup/2.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-Organization-Setup/3.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-Organization-Setup/4.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<p><img src="/assets/images/AWS-Organization-Setup/5.png" alt="CloudFront Invalidation Flowchart" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Done. You now have a multi-account AWS Organization setup.
+</code></pre></div></div>]]></content><author><name></name></author><category term="AWS" /><summary type="html"><![CDATA[Here are quick steps to set up an AWS Organization:]]></summary></entry></feed>

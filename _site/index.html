@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – AWS Cloud Consultant</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      background: transparent;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    });
+  </script>
+
+  <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+
+  <!-- 🧭 Navigation Bar -->
+  <nav>
+    <a href="/" class="button">Home</a>
+    <a href="/blog/" class="button">Blog</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+    <h1>Malcolm Soto</h1>
+    <h2 style="color: #1e90ff;">AWS Cloud Consultant & DevOps Problem Solver</h2>
+
+    <p>
+      I help businesses unlock the full potential of AWS by building scalable, secure, and cost-effective cloud environments.
+      From EC2 to S3, IAM, Terraform, and VPC automation — I bring clarity and action to your cloud goals.
+    </p>
+
+    <p>
+      Let’s design, optimize, or troubleshoot your AWS environment — with speed and precision. Thank You.
+    </p>
+
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact Me</a><br />
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" style="display: block; margin-top: 0.5rem;">Connect on LinkedIn</a>
+
+    <!-- 🎖️ Certifications Section -->
+    <section style="margin-top: 4rem;">
+      <h2>🎖️ My Certifications</h2>
+      <p>These badges are issued by Credly and verify my AWS & cloud skills.</p>
+      <a href="https://www.credly.com/users/malcolmsoto/badges" target="_blank" class="button">View My Badges</a>
+    </section>
+
+    <!-- 🔄 CI/CD Status -->
+    <section style="margin-top: 2rem;">
+      <h2>🔄 CI/CD Status</h2>
+      <p>Build & deployment powered by GitHub Actions</p>
+      <img src="https://github.com/malcolmso/mywebsite-ci-cd/actions/workflows/main.yml/badge.svg"
+           alt="Build Status"
+           style="background-color: transparent; border: 1px solid #ccc; padding: 4px; border-radius: 6px;" />
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
+</body>
+</html>
