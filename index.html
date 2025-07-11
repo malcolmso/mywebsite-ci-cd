@@ -86,6 +86,14 @@
       color: inherit;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
     footer {
       font-size: 0.85rem;
       margin-top: 4rem;
@@ -118,6 +126,14 @@
 
   <button class="toggle" onclick="toggleTheme()">Toggle Light/Dark Mode</button>
 
+  <!-- 🧭 Navigation Bar -->
+  <nav>
+    <a href="/" class="button">Home</a>
+    <a href="/blog/" class="button">Blog</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
   <main>
     <h1>Malcolm Soto</h1>
     <h2 style="color: #1e90ff;">AWS Cloud Consultant & DevOps Problem Solver</h2>
@@ -134,34 +150,26 @@
     <a href="mailto:malcolmittech@gmail.com" class="button">Contact Me</a><br />
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" style="display: block; margin-top: 0.5rem;">Connect on LinkedIn</a>
 
-    <!-- ✅ Blog Link Above Certifications -->
-    <div style="margin-top: 4rem;">
-      <a href="blog.html" class="button">Visit My Blog</a>
-    </div>
-
-    <!-- ✅ My Certifications Section -->
+    <!-- 🎖️ Certifications Section -->
     <section style="margin-top: 4rem;">
       <h2>🎖️ My Certifications</h2>
       <p>These badges are issued by Credly and verify my AWS & cloud skills.</p>
-      <div style="margin-top: 2rem;">
-        <a href="https://www.credly.com/users/malcolmsoto/badges" target="_blank" class="button">
-          View My Badges
-        </a>
+      <a href="https://www.credly.com/users/malcolmsoto/badges" target="_blank" class="button">View My Badges</a>
+    </section>
 
- <section style="margin-top: 2rem;">
-  <h2>🔄 CI/CD Status</h2>
-  <p>Build & deployment powered by GitHub Actions</p>
-  <img src="https://github.com/malcolmso/mywebsite-ci-cd/actions/workflows/main.yml/badge.svg" 
-       alt="Build Status" 
-       style="background-color: transparent; border: 1px solid #ccc; padding: 4px; border-radius: 6px;" />
-</section>
-
-
-    <footer>
-      <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
-      <p>Hosted in: <strong>AWS CloudFront</strong> </p>
-    </footer>
+    <!-- 🔄 CI/CD Status -->
+    <section style="margin-top: 2rem;">
+      <h2>🔄 CI/CD Status</h2>
+      <p>Build & deployment powered by GitHub Actions</p>
+      <img src="https://github.com/malcolmso/mywebsite-ci-cd/actions/workflows/main.yml/badge.svg"
+           alt="Build Status"
+           style="background-color: transparent; border: 1px solid #ccc; padding: 4px; border-radius: 6px;" />
+    </section>
   </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
 </body>
 </html>
-
