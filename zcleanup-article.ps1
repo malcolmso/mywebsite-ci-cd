@@ -1,17 +1,17 @@
 $articleDir = "articles"
 
 Get-ChildItem $articleDir -Filter *.html | ForEach-Object {
-    $file   = $_.FullName
-    $html   = Get-Content $file -Raw
+    $file = $_.FullName
+    $html = Get-Content $file -Raw
 
     $mainStart = $html.IndexOf("<main>")
-    $mainEnd   = $html.IndexOf("</main>")
+    $mainEnd   = $html.LastIndexOf("</main>")
 
     if ($mainStart -ge 0 -and $mainEnd -ge $mainStart) {
-        $contentOnly = $html.Substring($mainStart + 6, $mainEnd - $mainStart - 6).Trim()
-        Set-Content $file $contentOnly
-        Write-Host "✅ Cleaned:" $_.Name
+        $bodyContent = $html.Substring($mainStart + "<main>".Length, $mainEnd - ($mainStart + "<main>".Length)).Trim()
+        Set-Content $file $bodyContent
+        Write-Host "✅ Re-cleaned:" $_.Name
     } else {
-        Write-Host "⚠️ Skipped (no <main>):" $_.Name
+        Write-Host "⚠️ Still skipped (no <main>):" $_.Name
     }
 }
