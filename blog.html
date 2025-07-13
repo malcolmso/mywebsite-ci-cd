@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+
+<html data-theme="light" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malcolm Soto – Article</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Malcolm Soto – Article</title>
+<style>
     :root {
       --bg-light: #ffffff;
       --bg-dark: #121212;
@@ -167,7 +168,7 @@
   </style>
 </head>
 <body>
-  <script>
+<script>
     const toggleTheme = () => {
       const html = document.documentElement;
       const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
@@ -187,33 +188,23 @@
       updateToggleIcon(savedTheme);
     });
   </script>
+<!-- 🌞🌙 Theme Toggle -->
+<button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+<nav>
+  <a href="index.html" class="button">Home</a>
+  <a href="blog.html" class="button">Blog</a>
+  <a href="s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+  <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+  <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+</nav>
 
-  <!-- 🌞🌙 Theme Toggle -->
-  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
-
-  <nav>
-    <a href="../index.html" class="button">Home</a>
-    <a href="../blog.html" class="button">Blog</a>
-    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
-    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
-  </nav>
-
-  <main>
+<main>
 <h2>Recent Articles</h2>
-<ul>
-<li><a href="articles/aws-organization-setup.html">aws-organization-setup</a><br><em>This guide walks you through setting up an AWS Organization using the root management account. It's a great way to centralize account management and implement policies across teams.</em></li>
-<li><a href="articles/cloudfront-invalidation.html">cloudfront-invalidation</a><br><em>CloudFront invalidation tells AWS to remove cached copies of specified files from CDN edge locations so that CloudFront fetches the latest version from your origin (like S3) on the next request.</em></li>
-<li><a href="articles/get-rid-of-the-microsoft-edge-browser-startup-age.html">get-rid-of-the-microsoft-edge-browser-startup-age</a><br><em>If you're trying to get rid of the Microsoft Edge browser startup page — especially in enterprise environments — here's a reliable method using Group Policy.</em></li>
-<li><a href="articles/hosting-a-static-website-on-s3.html">hosting-a-static-website-on-s3</a><br><em>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static site with just a few steps.</em></li>
-<li><a href="articles/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html">how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way</a><br><em>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide walks you through setting up a two-node cluster manually with screenshots.</em></li>
-<li><a href="articles/setting-up-terraform-with-proxmox-my-experience.html">setting-up-terraform-with-proxmox-my-experience</a><br><em>When I first started using Terraform to manage Proxmox, I had to go through a few setup steps to get everything running smoothly. Here’s my walkthrough that helped simplify automation and provisioning.</em></li>
-<li><a href="articles/this-is-a-test.html">this-is-a-test</a><br><em>This is a Test</em></li>
-<li><a href="articles/windows-default-app-associations-gpo.html">windows-default-app-associations-gpo</a><br><em>If you want all users to start with your preferred default apps (e.g. PDF viewer, browser, music player), you can automate this via Group Policy.</em></li>
-</ul>
+<ul><li><a href="articles/aws-organization-setup.html">aws-organization-setup</a><br/><em>This guide walks you through setting up an AWS Organization using the root management account. It's a great way to centralize account management and implement policies across teams.</em></li><li><a href="articles/cloudfront-invalidation.html">cloudfront-invalidation</a><br/><em>CloudFront invalidation tells AWS to remove cached copies of specified files from CDN edge locations so that CloudFront fetches the latest version from your origin (like S3) on the next request.</em></li><li><a href="articles/get-rid-of-the-microsoft-edge-browser-startup-age.html">get-rid-of-the-microsoft-edge-browser-startup-age</a><br/><em>If you're trying to get rid of the Microsoft Edge browser startup page — especially in enterprise environments — here's a reliable method using Group Policy.</em></li><li><a href="articles/hosting-a-static-website-on-s3.html">hosting-a-static-website-on-s3</a><br/><em>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static site with just a few steps.</em></li><li><a href="articles/how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way.html">how-to-join-two-proxmox-servers-into-a-cluster-the-manual-way</a><br/><em>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide walks you through setting up a two-node cluster manually with screenshots.</em></li><li><a href="articles/setting-up-terraform-with-proxmox-my-experience.html">setting-up-terraform-with-proxmox-my-experience</a><br/><em>When I first started using Terraform to manage Proxmox, I had to go through a few setup steps to get everything running smoothly. Here’s my walkthrough that helped simplify automation and provisioning.</em></li><li><a href="articles/windows-default-app-associations-gpo.html">windows-default-app-associations-gpo</a><br/><em>If you want all users to start with your preferred default apps (e.g. PDF viewer, browser, music player), you can automate this via Group Policy.</em></li></ul>
 </main>
 <footer>
-  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
-  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+<p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+<p>Hosted in: <strong>AWS CloudFront</strong></p>
 </footer>
 </body>
 </html>
