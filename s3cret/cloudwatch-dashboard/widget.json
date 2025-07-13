@@ -1,0 +1,13 @@
+{
+  "width": 600,
+  "height": 395,
+  "metrics": [
+    [ "S3cretLab", "ArticlesPublished", "Source", "BlogGenerator", { "stat": "Sum" } ]
+  ],
+  "period": 300,
+  "start": "-PT6H",
+  "end": "PT0H",
+  "view": "timeSeries",
+  "stacked": false,
+  "title": "Articles Published (Last 6 Hours)"
+}
