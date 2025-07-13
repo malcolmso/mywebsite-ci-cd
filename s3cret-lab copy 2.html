@@ -131,23 +131,20 @@
       }
     }
 
-    /* CRT Fullscreen Banner */
+    /* CRT Banner Styles */
     #crt-container {
-      position: fixed;
-      inset: 0;
       background-color: black;
       color: #00FF00;
       font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      border: none;
+      padding: 1rem 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      border: 2px solid #00FF00;
       text-align: left;
       text-shadow: 0 0 3px #00FF00;
-      white-space: pre-wrap;
-      line-height: 1.5;
-      z-index: 9999;
+      border-radius: 10px;
+      white-space: pre;
+      min-height: 150px;
     }
 
     .blinker {
@@ -177,8 +174,15 @@
 
     const updateToggleIcon = (theme) => {
       const btn = document.getElementById("themeToggle");
-      if (btn) btn.textContent = theme === "dark" ? "🌙" : "🌞";
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
     };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+      runBootSequence();
+    });
 
     function runBootSequence() {
       const messages = [
@@ -189,7 +193,6 @@
       ];
 
       const container = document.getElementById("crt-container");
-      let output = "";
       let i = 0;
 
       function typeLine() {
@@ -197,37 +200,29 @@
           const line = messages[i];
           let j = 0;
           const interval = setInterval(() => {
-            output += line[j++];
-            container.textContent = output;
+            container.textContent += line[j++];
             if (j === line.length) {
               clearInterval(interval);
-              output += "\n";
+              container.textContent += "\n";
               i++;
               setTimeout(typeLine, 500);
             }
           }, 25);
         } else {
           setTimeout(() => {
-            container.style.display = "none";
-            const main = document.getElementById("main-content");
-            main.style.display = "block";
-            setTimeout(() => { main.style.opacity = 1; }, 100);
-          }, 1000);
+            document.getElementById("main-content").style.display = "block";
+            setTimeout(() => {
+              document.getElementById("main-content").style.opacity = 1;
+            }, 100);
+          }, 800);
         }
       }
 
       typeLine();
     }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateToggleIcon(savedTheme);
-      runBootSequence();
-    });
   </script>
 
-  <button class="toggle" id="themeToggle">🌞</button>
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
 
   <nav>
     <a href="index.html" class="button">Home</a>
@@ -237,10 +232,10 @@
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
-  <!-- CRT Boot Banner Fullscreen -->
+  <!-- CRT Boot Banner -->
   <div id="crt-container"></div>
 
-  <!-- Hidden until simulation completes -->
+  <!-- Main Content Hidden Initially -->
   <div id="main-content">
     <main>
       <h1>The S3cret Lab 🧪</h1>

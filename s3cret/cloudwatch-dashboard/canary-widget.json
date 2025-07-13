@@ -1,0 +1,13 @@
+{
+  "width": 600,
+  "height": 395,
+  "metrics": [
+    [ "CloudWatchSynthetics", "Duration", "CanaryName", "malcolmsoto", { "stat": "Average" } ]
+  ],
+  "period": 1800,
+  "start": "-PT2H",
+  "end": "PT0H",
+  "view": "singleValue",
+  "stacked": false,
+  "title": "Website Response Time (Last Run)"
+}
