@@ -3,8 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cognito Login Demo</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>S3cret Lab Login — Malcolm Soto</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #00ffae;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 5rem;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px #00ffae;
+    }
+
+    .login-container {
+      margin-bottom: 4rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button {
+      background-color: #00ffae;
+      color: #0f0f0f;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00ffae;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #00e69f;
+    }
+
+    pre {
+      font-size: 1rem;
+      color: #00ffae;
+      margin-top: 2rem;
+    }
+
+    footer {
+      border-top: 1px solid #00ffae;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: #00ffae;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div class="login-container">
@@ -17,5 +72,10 @@
 
     <pre id="output">Status: Awaiting login...</pre>
   </div>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
 </body>
 </html>
