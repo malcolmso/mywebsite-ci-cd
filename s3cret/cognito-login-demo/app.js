@@ -1,4 +1,3 @@
-// Wait for DOM to load before binding events
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("signupButton").addEventListener("click", signUp);
   document.getElementById("loginButton").addEventListener("click", signIn);
@@ -16,7 +15,7 @@ async function signUp() {
   try {
     const { user } = await Amplify.Auth.signUp({
       username: email,
-      password,
+      password
     });
     showOutput(`✅ Signed up as: ${user.getUsername()}`);
   } catch (err) {
@@ -36,12 +35,12 @@ async function signIn() {
   try {
     const user = await Amplify.Auth.signIn(email, password);
     showOutput(`✅ Logged in as: ${user.username}`);
+    window.location.href = "thank-you.html";
   } catch (err) {
     showOutput(`❌ Login Error: ${err.message}`);
   }
 }
 
 function showOutput(message) {
-  const output = document.getElementById("output");
-  output.textContent = `Status: ${message}`;
+  document.getElementById("output").textContent = `Status: ${message}`;
 }

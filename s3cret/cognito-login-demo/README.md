@@ -91,4 +91,3 @@ Upload your demo site to a public S3 bucket:
 
 Anyone who visits the page can sign up, log in, and see the flow — no backend or sensitive info involved. It’s exactly what a hiring manager or dev lead would want to see.
 
-You want me to create dummy values to simulate the config file for staging? Or guide you through deployment with CLI? Let’s lock it in.

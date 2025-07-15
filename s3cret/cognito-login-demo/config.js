@@ -1,9 +1,19 @@
-import { UserManager } from "oidc-client-ts";
+// Initialize Amplify with Cognito User Pool settings
+Amplify.configure({
+  Auth: {
+    // AWS Region where your Cognito User Pool lives
+    region: "us-east-1",
 
-export const userManager = new UserManager({
-  authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_H5qjYEHZW",
-  client_id: "73l9nta00if35u49e0t46fdahq",
-  redirect_uri: "https://malcolmsoto.com/s3cret/cognito-login-demo/thank-you.html",
-  response_type: "code",
-  scope: "email openid phone"
+    // Your Cognito User Pool ID
+    userPoolId: "us-east-1_H5qjYEHZW",
+
+    // Your Cognito App Client ID
+    userPoolWebClientId: "73l9nta00if35u49e0t46fdahq",
+
+    // Optional: Enables cookie storage for session tracking
+    storage: window.localStorage,
+
+    // Optional: Customize authentication flow
+    authenticationFlowType: "USER_PASSWORD_AUTH"
+  }
 });
