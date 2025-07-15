@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover { transform: scale(1.2); }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    article ul {
+      list-style: disc inside;
+      padding-left: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+
+    article li {
+      margin-bottom: .5rem;
+    }
+
+    pre {
+      background: #f5f5f5;
+      color: #000;
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: .9rem;
+      color: #000;
+    }
+
+    [data-theme="dark"] pre {
+      background: #1e1e1e;
+      color: #f0f0f0;
+    }
+
+    [data-theme="dark"] code {
+      color: #f0f0f0;
+    }
+
+    @media (max-width: 600px) {
+      .toggle { top: 0.75rem; right: 0.75rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.getElementById("themeToggle").textContent = newTheme === "dark" ? "🌙" : "🌞";
+    };
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+      document.getElementById("themeToggle").textContent = saved === "dark" ? "🌙" : "🌞";
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  
+
+<main>
+  <article>
+    <h1>🚀 How to Deploy Kubernetes on Bare Metal (Ubuntu)</h1>
+    <p>This guide walks you through how I successfully deployed Kubernetes on bare metal using Ubuntu 22.04. We'll use <strong>kubeadm</strong> for cluster setup and <strong>containerd</strong> as the container runtime.</p>
+    <p>Perfect for labs, self-hosting, and dev environments where cloud isn't required.</p>
+
+    <p>🔗 Reference Git Repo: <a href="https://github.com/malcolmso/kube-install">github.com/malcolmso/kube-install</a></p>
+
+    <img src="../assets/images/how-to-deploy-kubernetes-on-bare-metal-ubuntu-step-by-step-guide/how-to-deploy-kubernetes-on-bare-metal-ubuntu-step-by-step-guide-img1.png" alt="Bare metal Kubernetes architecture" />
+
+    <h2>🔧 Prerequisites</h2>
+    <ul>
+      <li>2+ Ubuntu 22.04 servers (1 master + 1+ workers)</li>
+      <li>Root access on all nodes</li>
+      <li>Internet connectivity</li>
+    </ul>
+
+    <h2>🧱 Step&nbsp;1: Prepare the Nodes</h2>
+    <p>Install containerd, disable swap, and install Kubernetes components:</p>
+<pre><code># Install containerd
+sudo apt install -y containerd
+sudo mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+sudo systemctl restart containerd
+
+# Disable swap
+sudo swapoff -a
+sudo sed -i '/[[:space:]]swap[[:space:]]/ s/^/#/' /etc/fstab
+
+# Install Kubernetes packages
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg socat docker.io
+
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
+  https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | \
+  sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm
+
+# (Optional) Install kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl</code></pre>
+
+    <h2>🧠 Step&nbsp;2: Initialize the Control Plane</h2>
+    <p>Run these commands on the master node:</p>
+<pre><code># Enable IP forwarding
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo sed -i 's/^#*net.ipv4.ip_forward=.*/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+sudo sysctl -p
+
+# Pull required images and initialize cluster
+sudo kubeadm config images pull
+sudo kubeadm init</code></pre>
+
+    <p><strong>Note:</strong> Save the <code>kubeadm join</code> command shown at the end — you’ll need it for the worker nodes.</p>
+<pre><code># Configure kubectl for your user
+mkdir -p $HOME/.kube
+sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
+
+    <h2>🌐 Step&nbsp;3: Install Pod Network (Calico)</h2>
+    <p>Install Calico to enable pod-to-pod networking across nodes:</p>
+<pre><code>kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+kubectl get nodes</code></pre>
+
+    <h2>👷 Step&nbsp;4: Join Worker Nodes</h2>
+    <p>On each worker node, enable networking and join the cluster using the token from Step&nbsp;2:</p>
+<pre><code># Enable IP forwarding
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo sed -i 's/^#*net.ipv4.ip_forward=.*/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+sudo sysctl -p
+
+# Join the cluster
+sudo kubeadm join &lt;control-plane-ip&gt;:6443 --token &lt;token&gt; \
+  --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</code></pre>
+
+    <h2>✅ Wrapping Up</h2>
+    <ul>
+      <li>Deploy applications using <code>kubectl</code></li>
+      <li>Monitor your cluster using Prometheus and Grafana</li>
+      <li>Explore advanced topics like Helm, RBAC, and network policies</li>
+    </ul>
+  </article>
+</main>
+
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>

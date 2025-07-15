@@ -5,90 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Malcolm Soto – Article</title>
   <style>
-    :root {
-      --bg-light: #ffffff;
-      --bg-dark: #121212;
-      --text-light: #000000;
-      --text-dark: #f0f0f0;
-      --button-light: #1e90ff;
-      --button-dark: #4c9aff;
-    }
-
     body {
       margin: 0;
       font-family: system-ui, sans-serif;
-      background-color: var(--bg-light);
-      color: var(--text-light);
+      background-color: var(--bg-light, #ffffff);
+      color: var(--text-light, #000);
       text-align: center;
       padding: 2rem 1rem;
       transition: background 0.3s, color 0.3s;
-      position: relative;
     }
 
     [data-theme="dark"] body {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
+      background-color: var(--bg-dark, #121212);
+      color: var(--text-dark, #f0f0f0);
     }
 
-    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-    h3 { margin-bottom: 0.3rem; }
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+    }
 
-    p {
+    p, li, pre {
       max-width: 700px;
       margin: 0 auto 1rem auto;
       line-height: 1.6;
+      text-align: left;
     }
 
-    a {
-      color: var(--button-light);
-      text-decoration: none;
+    ul, ol {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      text-align: left;
     }
 
-    [data-theme="dark"] a {
-      color: var(--button-dark);
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      background-color: var(--button-light);
-      color: white;
-      border: none;
+    pre {
+      background-color: #f4f4f4;
+      padding: 1rem;
       border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
+      overflow-x: auto;
+      font-family: monospace;
     }
 
-    [data-theme="dark"] .button {
-      background-color: var(--button-dark);
-      color: white;
+    [data-theme="dark"] pre {
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+    }
+
+    img {
+      max-width: 600px;
+      display: block;
+      margin: 1rem auto;
+      border-radius: 8px;
     }
 
     .toggle {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      padding: 0.3rem 0.6rem;
-      font-size: 1.2rem;
-      background-color: transparent;
+      background: transparent;
       border: none;
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .toggle:hover {
-      transform: scale(1.2);
+      font-size: 1.2rem;
     }
 
     nav {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin: 2rem auto;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      padding: 0.75rem 1.5rem;
+      background-color: #1e90ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: #4c9aff;
     }
 
     footer {
@@ -96,176 +94,103 @@
       margin-top: 4rem;
       color: gray;
     }
-
-    img {
-      max-width: 600px;
-      border: none;
-      outline: none;
-      box-shadow: none;
-      border-radius: 8px;
-      margin: 1rem auto;
-      display: block;
-    }
-
-    /* 📝 Blog Index Styling */
-    main ul {
-      list-style: none;
-      padding: 0;
-      max-width: 700px;
-      margin: 0 auto 2rem auto;
-      text-align: left;
-    }
-
-    main li {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 8px;
-      background-color: #f9f9f9;
-      transition: background-color 0.3s;
-    }
-
-    [data-theme="dark"] main li {
-      background-color: #1e1e1e;
-    }
-
-    main li:hover {
-      background-color: #e6f0ff;
-    }
-
-    [data-theme="dark"] main li:hover {
-      background-color: #2a3c55;
-    }
-
-    main a {
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: var(--button-light);
-    }
-
-    [data-theme="dark"] main a {
-      color: var(--button-dark);
-    }
-
-    main em {
-      display: block;
-      margin-top: 0.4rem;
-      color: #555;
-      font-style: normal;
-    }
-
-    [data-theme="dark"] main em {
-      color: #aaa;
-    }
-
-    @media (max-width: 600px) {
-      .toggle {
-        top: 0.75rem;
-        right: 0.75rem;
-        font-size: 1rem;
-      }
-    }
   </style>
 </head>
 <body>
-  <script>
-    const toggleTheme = () => {
-      const html = document.documentElement;
-      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateToggleIcon(newTheme);
-    };
-
-    const updateToggleIcon = (theme) => {
-      const btn = document.getElementById("themeToggle");
-      btn.textContent = theme === "dark" ? "🌙" : "🌞";
-    };
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateToggleIcon(savedTheme);
-    });
-  </script>
-
-  <!-- 🌞🌙 Theme Toggle -->
-  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+  <button class="toggle" id="themeToggle">🌞</button>
 
   <nav>
     <a href="../index.html" class="button">Home</a>
     <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
     <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
   <main>
-<h1>🌐 Hosting a Static Website on AWS S3</h1>
-    <p>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static site with just a few steps.</p>
+    <article>
+      <h1>🌐 Hosting a Static Website on AWS S3</h1>
+      <p>Hosting a static website on AWS S3 is a cost-effective and scalable solution. This guide walks you through setting up your own static site with just a few steps.</p>
 
-    <h2>Step 1: Clone My Git Repo</h2>
-    <p>Grab the sample files from my GitHub:</p>
-    <code>git clone https://github.com/malcolmso/aws</code>
+      <h2>📦 Step 1: Clone My Git Repo</h2>
+      <p>Grab the sample files from my GitHub:</p>
+      <pre><code>git clone https://github.com/malcolmso/aws</code></pre>
 
-    <h2>Step 2: Create an S3 Bucket</h2>
-    <ol>
-      <li>Log in to your AWS Console.</li>
-      <li>Navigate to S3 and click “Create Bucket.”</li>
-      <li>Provide a unique bucket name.</li>
-      <li>Select a region and adjust settings as needed.</li>
-      <li>Click “Create Bucket.”</li>
-    </ol>
+      <h2>🪣 Step 2: Create an S3 Bucket</h2>
+      <ol>
+        <li>Log in to your AWS Console.</li>
+        <li>Navigate to S3 and click “Create Bucket.”</li>
+        <li>Provide a unique bucket name.</li>
+        <li>Select a region and adjust settings as needed.</li>
+        <li>Click “Create Bucket.”</li>
+      </ol>
 
-    <h2>Step 3: Upload Your HTML Files</h2>
-    <ol>
-      <li>Open the bucket.</li>
-      <li>Click “Upload” and add <code>index.html</code> and <code>error.html</code>.</li>
-      <li>Click “Upload” to confirm.</li>
-    </ol>
+      <h2>📂 Step 3: Upload Your HTML Files</h2>
+      <ol>
+        <li>Open the bucket.</li>
+        <li>Click “Upload” and add <code>index.html</code> and <code>error.html</code>.</li>
+        <li>Click “Upload” to confirm.</li>
+      </ol>
 
-    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/1.png" alt="Upload HTML files to S3" />
+      <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/1.png" alt="Upload HTML files to S3" />
 
-    <h2>Step 4: Enable Static Website Hosting</h2>
-    <ol>
-      <li>Go to the Properties tab of your bucket.</li>
-      <li>Scroll to Static Website Hosting → Edit.</li>
-      <li>Enable hosting and set:
-        <br/>Index Document: <code>index.html</code>
-        <br/>Error Document: <code>error.html</code>
-      </li>
-      <li>Click “Save.”</li>
-      <li>Note the Bucket Website Endpoint:
-        <br/><code>http://your-bucket-name.s3-website-us-east-1.amazonaws.com/</code>
-      </li>
-    </ol>
+      <h2>⚙️ Step 4: Enable Static Website Hosting</h2>
+      <ol>
+        <li>Go to the <strong>Properties</strong> tab of your bucket.</li>
+        <li>Scroll to <strong>Static Website Hosting</strong> → Edit.</li>
+        <li>Enable hosting and set:</li>
+      </ol>
+      <pre><code>Index Document: index.html
+Error Document: error.html</code></pre>
+      <p>Click “Save.” Then note your bucket endpoint:</p>
+      <pre><code>http://your-bucket-name.s3-website-us-east-1.amazonaws.com/</code></pre>
 
-    <h2>Step 5: Update Bucket Permissions</h2>
-    <ol>
-      <li>Go to the Permissions tab → Bucket Policy → Edit.</li>
-      <li>Copy your Bucket ARN:
-        <br/><code>arn:aws:s3:::your-bucket-name</code>
-      </li>
-      <li>Use the AWS Policy Generator:
-        <ul>
-          <li>Policy Type: S3 Bucket Policy</li>
-          <li>Effect: Allow</li>
-          <li>Principal: <code>*</code></li>
-          <li>Action: <code>s3:GetObject</code></li>
-          <li>ARN: <code>arn:aws:s3:::your-bucket-name/*</code></li>
-        </ul>
-      </li>
-      <li>Click Add Statement → Generate Policy.</li>
-      <li>Paste it into the Bucket Policy editor → Save.</li>
-    </ol>
+      <h2>🔐 Step 5: Update Bucket Permissions</h2>
+      <ol>
+        <li>Go to <strong>Permissions</strong> → <strong>Bucket Policy</strong> → Edit.</li>
+        <li>Copy your Bucket ARN:</li>
+      </ol>
+      <pre><code>arn:aws:s3:::your-bucket-name</code></pre>
 
-    <h2>Step 6: Test the Website</h2>
-    <p>Open the URL in your browser and confirm the site loads correctly 🎉</p>
+      <p>Use the AWS Policy Generator to build a public-read policy:</p>
+      <ul>
+        <li>Policy Type: S3 Bucket Policy</li>
+        <li>Effect: Allow</li>
+        <li>Principal: <code>*</code></li>
+        <li>Action: <code>s3:GetObject</code></li>
+        <li>ARN: <code>arn:aws:s3:::your-bucket-name/*</code></li>
+      </ul>
 
-    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/2.png" alt="Static hosting configuration" />
-    <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/3.png" alt="Bucket policy setup" />
-</main>
-<footer>
-  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
-  <p>Hosted in: <strong>AWS CloudFront</strong></p>
-</footer>
+      <p>Click <strong>Add Statement → Generate Policy</strong>. Paste the result into the Bucket Policy editor and click Save.</p>
+
+      <h2>🧪 Step 6: Test the Website</h2>
+      <p>Open the endpoint in your browser and confirm the site loads correctly 🎉</p>
+
+      <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/2.png" alt="Static hosting configuration" />
+      <img src="../assets/images/Hosting-a-Static-Website-on-AWS-S3/3.png" alt="Bucket policy setup" />
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+    <p>Hosted in: <strong>AWS CloudFront</strong></p>
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      btn.textContent = savedTheme === "dark" ? "🌙" : "🌞";
+
+      btn.onclick = () => {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        btn.textContent = next === "dark" ? "🌙" : "🌞";
+      };
+    });
+  </script>
 </body>
 </html>

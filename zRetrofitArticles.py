@@ -5,6 +5,8 @@
 # Save the result back to the same .html file
 
 
+#!/usr/bin/env python3
+# pip install python-docx lxml
 from pathlib import Path
 
 # Load wrapper content
@@ -24,7 +26,10 @@ for html_file in Path("articles").glob("*.html"):
     else:
         core = original.strip()  # fallback if <main> not found
 
-    # Rewrap with new layout
-    new_html = f"{top}\n{core}\n{bottom}"
+    # Rewrap with <main> tag
+    wrapped_core = f"<main>\n{core}\n</main>"
+
+    # Assemble new layout
+    new_html = f"{top}\n{wrapped_core}\n{bottom}"
     html_file.write_text(new_html, encoding="utf-8")
     print(f"✅ Retrofitted: {html_file.name}")
