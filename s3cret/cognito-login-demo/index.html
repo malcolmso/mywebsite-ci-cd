@@ -5,21 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cognito Login Demo</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Load AWS Amplify -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-amplify/6.15.3/aws-amplify.min.js"></script>
-  <script src="config.js" defer></script>
-  <script src="app.js" defer></script>
 </head>
 <body>
   <div class="login-container">
     <h1>🔐 Malcolm's 🔐</h1>
     <h1>S3cret Lab Login</h1>
 
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
-
-    <button id="signupButton">Sign Up</button>
-    <button id="loginButton">Log In</button>
+    <a href="https://us-east-1h5qjyehzw.auth.us-east-1.amazoncognito.com/login?client_id=73l9nta00if35u49e0t46fdahq&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmalcolmsoto.com%2Fs3cret%2Fcognito-login-demo%2Fthank-you.html">
+      <button>🔐 Launch Cognito Login</button>
+    </a>
 
     <pre id="output">Status: Awaiting login...</pre>
   </div>
