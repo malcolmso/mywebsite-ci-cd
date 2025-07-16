@@ -224,6 +224,9 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateToggleIcon(savedTheme);
       runBootSequence();
+
+      // bind toggle button
+      document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     });
   </script>
 

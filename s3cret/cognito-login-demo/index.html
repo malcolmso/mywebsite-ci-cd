@@ -1,74 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S3cret Lab Login — Malcolm Soto</title>
   <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
     body {
-      background: #0f0f0f;
-      color: #00ffae;
-      font-family: 'Courier New', Courier, monospace;
-      text-align: center;
-      padding: 5rem;
       margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
     }
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 5px #00ffae;
+      margin-bottom: 0.5rem;
     }
 
-    .login-container {
-      margin-bottom: 4rem;
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
     a {
       text-decoration: none;
+      color: var(--button-light);
     }
 
-    button {
-      background-color: #00ffae;
-      color: #0f0f0f;
-      font-family: inherit;
-      font-size: 1rem;
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 0.5rem;
       padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 8px #00ffae;
-      transition: background 0.2s ease;
+      text-decoration: none;
     }
 
-    button:hover {
-      background-color: #00e69f;
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    .login-container {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
     }
 
     pre {
       font-size: 1rem;
-      color: #00ffae;
       margin-top: 2rem;
+      color: inherit;
     }
 
     footer {
-      border-top: 1px solid #00ffae;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      font-size: 0.9rem;
-      color: #00ffae;
-      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <!-- 🌞🌙 Theme Toggle -->
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <!-- 🧭 Navigation -->
+  <div class="nav-buttons">
+    <a href="index.html" class="button">Home</a>
+    <a href="blog.html" class="button">Blog</a>
+    <a href="s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </div>
+
+  <!-- 🔐 Login Section -->
   <div class="login-container">
     <h1>🔐 Malcolm's 🔐</h1>
-    <h1>S3cret Lab Login</h1>
+    <h2>S3cret Lab Login</h2>
 
-    <a href="https://us-east-1h5qjyehzw.auth.us-east-1.amazoncognito.com/login?client_id=73l9nta00if35u49e0t46fdahq&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmalcolmsoto.com%2Fs3cret%2Fcognito-login-demo%2Fthank-you.html">
-      <button>🔐 Launch Cognito Login</button>
-    </a>
+    <a href="https://us-east-1h5qjyehzw.auth.us-east-1.amazoncognito.com/login?client_id=73l9nta00if35u49e0t46fdahq&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmalcolmsoto.com%2Fs3cret%2Fcognito-login-demo%2Fthank-you.html" class="button">🔓 Launch Cognito Login</a>
 
     <pre id="output">Status: Awaiting login...</pre>
   </div>
