@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+<h1>Connect my new Microsoft Enterprise Account to a Domain I own</h1>
+<p>Connect my new Microsoft Enterprise Account to a Domain I own</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img1.png" alt="Image 1" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Set up email with a custom domain</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img2.png" alt="Image 2" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Use a domain you already own</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img3.png" alt="Image 3" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Continue</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img4.png" alt="Image 4" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Continue</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img5.png" alt="Image 5" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Start with the TXT record
+Click Verify</p>
+
+<p>Step by step instructions:</p>
+<p><a href="https://learn.microsoft.com/en-us/microsoft-365/admin/dns/create-dns-records-at-aws?view=o365-worldwide#add-a-txt-record-for-verification" target="_blank" rel="noopener noreferrer">
+  https://learn.microsoft.com/en-us/microsoft-365/admin/dns/create-dns-records-at-aws?view=o365-worldwide#add-a-txt-record-for-verification
+</a></p>
+
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img6.png" alt="Image 6" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Login to your domain host for me its AWS</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img7.png" alt="Image 7" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Navigate to Route53, open your domain name, click Create record</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img8.png" alt="Image 8" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Add the TXT record 
+(you can merge the TXT and "v=spf1 include:spf.protection.outlook.com -all" record together) Below you will see the error I was having.</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img9.png" alt="Image 9" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img10.png" alt="Image 10" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Verify</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img11.png" alt="Image 11" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Update and Sign out</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img12.png" alt="Image 12" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Select the new email address you want now, click Continue</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img13.png" alt="Image 13" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Click Next</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img14.png" alt="Image 14" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>MX Record Time</p>
+
+<p>Connect your domain to Microsoft 365:<br />
+<a href="https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-an-mx-record-so-email-for-your-domain-will-come-to-microsoft" target="_blank" rel="noopener noreferrer">
+  https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-an-mx-record-so-email-for-your-domain-will-come-to-microsoft
+</a></p>
+
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img15.png" alt="Image 15" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img16.png" alt="Image 16" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img17.png" alt="Image 17" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+
+<p>Add this CNAME record to connect users to their mailboxes:<br />
+<a href="https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-a-cname-record-to-connect-users-to-their-mailboxes" target="_blank" rel="noopener noreferrer">
+  https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-a-cname-record-to-connect-users-to-their-mailboxes
+</a></p>
+
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img18.png" alt="Image 18" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+
+<p>Add this TXT record to help prevent spam:<br />
+<a href="https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-a-txt-record-to-help-prevent-spam" target="_blank" rel="noopener noreferrer">
+  https://learn.microsoft.com/en-us/microsoft-365/admin/misc/set-up-dns-records-vsb?view=o365-worldwide&WT.mc_id=365AdminCSH_inproduct#add-a-txt-record-to-help-prevent-spam
+</a></p>
+
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img19.png" alt="Image 19" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img20.png" alt="Image 20" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img21.png" alt="Image 21" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>I got this error because I forgot on Amazon, I was using their Amazon SES (Simple Email Service)
+I had to delete my Identities that was using the SPF record.</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img22.png" alt="Image 22" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Here was the fix! I merge the two DNS values in one record!</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img23.png" alt="Image 23" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img24.png" alt="Image 24" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img25.png" alt="Image 25" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Yes finally</p>
+<img src="../assets/images/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own/connect-my-new-microsoft-enterprise-account-to-a-domain-i-own-img26.png" alt="Image 26" style="max-width:600px; display:block;margin:1rem auto;border-radius:8px;" />
+<p>Assigned my first E5 license to the user.</p>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
