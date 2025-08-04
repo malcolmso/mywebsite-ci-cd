@@ -131,36 +131,9 @@
       }
     }
 
-    /* CRT Fullscreen Banner */
-    #crt-container {
-      position: fixed;
-      inset: 0;
-      background-color: black;
-      color: #00FF00;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      border: none;
-      text-align: left;
-      text-shadow: 0 0 3px #00FF00;
-      white-space: pre-wrap;
-      line-height: 1.5;
-      z-index: 9999;
-    }
-
-    .blinker {
-      animation: blink 1s step-start infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
     #main-content {
-      display: none;
-      opacity: 0;
+      display: block;
+      opacity: 1;
       transition: opacity 0.8s ease-in;
     }
   </style>
@@ -180,52 +153,11 @@
       if (btn) btn.textContent = theme === "dark" ? "🌙" : "🌞";
     };
 
-    function runBootSequence() {
-      const messages = [
-        "> Initializing S3cret Lab environment...",
-        "> Status: [Online]",
-        "> Last deploy: July 13 2025 03:24 CDT",
-        "> Entering simulation mode █"
-      ];
-
-      const container = document.getElementById("crt-container");
-      let output = "";
-      let i = 0;
-
-      function typeLine() {
-        if (i < messages.length) {
-          const line = messages[i];
-          let j = 0;
-          const interval = setInterval(() => {
-            output += line[j++];
-            container.textContent = output;
-            if (j === line.length) {
-              clearInterval(interval);
-              output += "\n";
-              i++;
-              setTimeout(typeLine, 500);
-            }
-          }, 25);
-        } else {
-          setTimeout(() => {
-            container.style.display = "none";
-            const main = document.getElementById("main-content");
-            main.style.display = "block";
-            setTimeout(() => { main.style.opacity = 1; }, 100);
-          }, 1000);
-        }
-      }
-
-      typeLine();
-    }
-
     window.addEventListener("DOMContentLoaded", () => {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
       updateToggleIcon(savedTheme);
-      runBootSequence();
 
-      // bind toggle button
       document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     });
   </script>
@@ -240,49 +172,43 @@
     <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
   </nav>
 
-  <!-- CRT Boot Banner Fullscreen -->
-  <div id="crt-container"></div>
-
-  <!-- Hidden until simulation completes -->
   <div id="main-content">
     <main>
       <h1>The S3cret Lab 🧪</h1>
       <p>Welcome to my AWS playground — where experiments run wild and DevOps gets hands-on.</p>
 
-<section>
-  <h2>🔐 Cognito Login Demo</h2>
-  <p>Explore a secure, static sign-in interface powered by AWS Cognito. No backends, no secrets — perfect for sandboxing OIDC flows.</p>
-  <a href="https://malcolmsoto.com/s3cret/cognito-login-demo/index.html" class="button">Launch Login Demo</a>
-  <a href="https://github.com/malcolmso/mywebsite-ci-cd/tree/main/s3cret/cognito-login-demo" target="_blank" class="button">View Source</a>
-</section>
-
+      <section>
+        <h2>🔐 Cognito Login Demo</h2>
+        <p>Explore a secure, static sign-in interface powered by AWS Cognito. No backends, no secrets — perfect for sandboxing OIDC flows.</p>
+        <a href="https://malcolmsoto.com/s3cret/cognito-login-demo/index.html" class="button">Launch Login Demo</a>
+        <a href="https://github.com/malcolmso/mywebsite-ci-cd/tree/main/s3cret/cognito-login-demo" target="_blank" class="button">View Source</a>
+      </section>
 
       <section>
         <h2>📊 CloudWatch Dashboard</h2>
         <p>This graph shows article publishing activity on malcolmsoto.com using AWS CloudWatch telemetry.</p>
-
         <img src="s3cret/cloudwatch-dashboard/articles-published.png" alt="Articles Published Graph" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem;" />
-
         <div>
           <a href="https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metricsV2:namespace=S3cretLab" target="_blank" class="button">View in CloudWatch</a>
           <a href="https://github.com/malcolmso/mywebsite-ci-cd/tree/main/s3cret/cloudwatch-dashboard" target="_blank" class="button">View Source</a>
         </div>
       </section>
 
-    <section>
-      <h2>📦 S3 Event Automation</h2>
-      <p>Drop a `.docx` into S3 and let Lambda build and publish your article — serverless publishing in action.</p>
-    </section>
+      <section>
+        <h2>📦 S3 Event Automation</h2>
+        <p>Drop a `.docx` into S3 and let Lambda build and publish your article — serverless publishing in action.</p>
+      </section>
 
-    <section>
-      <h2>⚙️ GitHub Actions → S3 → CloudFront</h2>
-      <p>Fully automated CI/CD with every push: build, sync, invalidate — all hands-free.</p>
-    </section>
-  </main>
+      <section>
+        <h2>⚙️ GitHub Actions → S3 → CloudFront</h2>
+        <p>Fully automated CI/CD with every push: build, sync, invalidate — all hands-free.</p>
+      </section>
+    </main>
 
-<footer>
-  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
-  <p>Hosted in: <strong>AWS CloudFront</strong></p>
-</footer>
+    <footer>
+      <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+      <p>Hosted in: <strong>AWS CloudFront</strong></p>
+    </footer>
+  </div>
 </body>
 </html>
