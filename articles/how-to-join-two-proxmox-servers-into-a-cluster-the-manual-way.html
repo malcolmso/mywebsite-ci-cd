@@ -1,14 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
 <article>
-    <h1>🖧 Join Two Proxmox Servers into a Cluster</h1>
+    <h1>Join Two Proxmox Servers into a Cluster</h1>
     <p>Proxmox VE makes it easy to manage multiple servers by clustering them together. This guide walks you through setting up a two-node cluster manually with screenshots.</p>
 
-    <h2>📋 Prerequisites</h2>
+    <h2>Prerequisites</h2>
     <ul>
       <li>Two or more Proxmox VE servers with static IP addresses</li>
       <li>Root privileges on both servers</li>
     </ul>
 
-    <h2>🛠️ Step 1: Create the Cluster on Server 1</h2>
+    <h2>Step 1: Create the Cluster on Server 1</h2>
     <ol>
       <li>Log into Server 1.</li>
       <li>Navigate to <strong>Datacenter → Cluster</strong>.</li>
@@ -17,7 +216,7 @@
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/1.png" alt="Create cluster step 1" />
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/2.png" alt="Cluster creation in progress" />
 
-    <h2>📨 Step 2: Copy Join Information</h2>
+    <h2>Step 2: Copy Join Information</h2>
     <ol>
       <li>Still on Server 1, open the <strong>Join Information</strong> tab.</li>
       <li>Copy the displayed details including fingerprint and token.</li>
@@ -25,18 +224,23 @@
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/3.png" alt="Join Information screen" />
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/4.png" alt="Copy join details" />
 
-    <h2>🔌 Step 3: Join Server 2 to the Cluster</h2>
+    <h2>Step 3: Join Server 2 to the Cluster</h2>
     <ol>
       <li>On Server 2, go to <strong>Datacenter → Cluster → Join Cluster</strong>.</li>
       <li>Paste the join information and click <strong>Join</strong>.</li>
     </ol>
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/5.png" alt="Join cluster on second server" />
 
-    <h2>🔗 Optional: Join via CLI</h2>
+    <h2>Optional: Join via CLI</h2>
     <p>If you prefer using the command line, you can run this on Server 2:</p>
     <pre><code class="language-bash">pvecm add &lt;Server1-IP&gt;</code></pre>
 
-    <h2>✅ Cluster Ready</h2>
+    <h2>Cluster Ready</h2>
     <p>Once complete, both servers should appear in the cluster view and can participate in HA tasks, shared storage, and fencing actions.</p>
     <img src="../assets/images/How-to-Join-Two-Proxmox-Servers-into-a-Cluster-the-manual-way/6.png" alt="Cluster setup complete" />
   </article>
+  <footer>
+    <p>© 2025 Malcolm Soto | Houston, TX | <a href="https://malcolmsoto.com">malcolmsoto.com</a></p>
+  </footer>
+</body>
+</html>
