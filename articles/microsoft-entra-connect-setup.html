@@ -203,16 +203,24 @@
 <h1>Microsoft Entra Connect Setup</h1>
 <p>Microsoft Entra Connect Setup</p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
-<p>Prerequisites Checklist</p>
-<p>make sure you’ve got:</p>
+<p><strong>Checklist - make sure you’ve got:</strong></p>
 <p>•Windows Server 2025 VM joined to your on-prem AD domain</p>
 <p>•On-prem Active Directory already configured (AD DS role installed)</p>
 <p>•Azure AD tenant ready (with Global Admin access)</p>
 <p>•Internet access from the VM</p>
 <p>•Optional but recommended: a dedicated service account for Azure AD Connect</p>
 <p>Step-by-Step:</p>
-<p>DownloadEntraConnect– Cloud Sync</p>
-<p>Get the latest version fromyour Entra Portal:<a href="https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted" target="_blank" rel="noopener">https://entra.microsoft.com</a>Click Entra Connect >Get Started > Manage > Download Connect Sync Agent</p>
+<p><strong>Download Entra Connect – Cloud Sync</strong></p>
+<p>
+  Get the latest version from your Entra Portal:<br>
+  <a href="https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted" target="_blank" rel="noopener">
+    entra.microsoft.com
+  </a>
+</p>
+<p>
+  In the portal, navigate to:<br>
+  <strong>Entra Connect → Get Started → Manage → Download Connect Sync Agent</strong>
+</p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
@@ -234,7 +242,7 @@
 <p>•Pass-through authentication:</p>
 <p>Only if you need real-time password validation against your on-prem AD. More complex and less resilient than hash sync.</p>
 <p>•Federation with AD FS / PingFederate:</p>
-<p>Enterprise-grade setups with external identity providers. Not needed for your lab.</p>
+<p>Enterprise-grade setups with external identity providers.</p>
 <p>•Do not configure:</p>
 <p>Only if you're planning to set up sign-in manually later.</p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img12.png" alt="Image 12" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
@@ -252,11 +260,11 @@
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img23.png" alt="Image 23" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img24.png" alt="Image 24" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img25.png" alt="Image 25" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
-<p>Let’sEnable Active Directory Recycle Bin</p>
+<p><strong>Let’s Enable Active Directory Recycle Bin</strong></p>
 <p>-Adds protection against accidental deletions</p>
 <p>-Can be done via PowerShell:</p>
 <p>Enable-ADOptionalFeature -Identity 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target 'malcolmsoto.com'</p>
-<p>Setup a Group Policy to Enable Seamless SSO</p>
+<p><strong>Setup a Group Policy to Enable Seamless SSO</strong></p>
 <p>Open gpmc.ms</p>
 <p>Create a policy and link it to the OU</p>
 <p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img26.png" alt="Image 26" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
