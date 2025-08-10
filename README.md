@@ -100,3 +100,4 @@ Your site updates instantly.
 - ✔️ Use clear filenames (e.g. `cloudfront-tutorial.docx`) to help organize articles
 - 🖼️ Avoid Snipping Tool black outlines — crop or clean images before saving
 - 🏷 Want to add categories, timestamps, or captions? The system is ready to expand
+
