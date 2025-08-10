@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+<h1>Microsoft Entra Connect Setup</h1>
+<p>Microsoft Entra Connect Setup</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Prerequisites Checklist</p>
+<p>make sure you’ve got:</p>
+<p>•Windows Server 2025 VM joined to your on-prem AD domain</p>
+<p>•On-prem Active Directory already configured (AD DS role installed)</p>
+<p>•Azure AD tenant ready (with Global Admin access)</p>
+<p>•Internet access from the VM</p>
+<p>•Optional but recommended: a dedicated service account for Azure AD Connect</p>
+<p>Step-by-Step:</p>
+<p>DownloadEntraConnect– Cloud Sync</p>
+<p>Get the latest version fromyour Entra Portal:<a href="https://entra.microsoft.com/#view/Microsoft_AAD_Connect_Provisioning/AADConnectMenuBlade/~/GetStarted" target="_blank" rel="noopener">https://entra.microsoft.com</a>Click Entra Connect >Get Started > Manage > Download Connect Sync Agent</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img5.png" alt="Image 5" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img6.png" alt="Image 6" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img7.png" alt="Image 7" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Make a service account – password don’t expire</p>
+<p>Add the new account in the “Log on as a service” insecpol.msc</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img8.png" alt="Image 8" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img9.png" alt="Image 9" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img10.png" alt="Image 10" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img11.png" alt="Image 11" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>✅Recommended Selection</p>
+<p>•Password Hash Synchronization</p>
+<p>This is the simplest and most reliable method for hybrid identity in a lab or small enterprise setup. It syncs password hashes from your on-prem AD to Azure AD, allowing users to sign in with the same credentials.</p>
+<p>•Optional: Enable Single Sign-On (SSO)</p>
+<p>You can check this box if you want seamless sign-in for domain-joined devices. It requires a small change to your on-prem AD (adds a computer account and configures Kerberos SSO). Since you're testing Conditional Access and Autopilot, enabling SSO will give you a smoother experience.</p>
+<p>When to Use Other Options</p>
+<p>•Pass-through authentication:</p>
+<p>Only if you need real-time password validation against your on-prem AD. More complex and less resilient than hash sync.</p>
+<p>•Federation with AD FS / PingFederate:</p>
+<p>Enterprise-grade setups with external identity providers. Not needed for your lab.</p>
+<p>•Do not configure:</p>
+<p>Only if you're planning to set up sign-in manually later.</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img12.png" alt="Image 12" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img13.png" alt="Image 13" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img14.png" alt="Image 14" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img15.png" alt="Image 15" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img16.png" alt="Image 16" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img17.png" alt="Image 17" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>I created a OU to only sync what I want</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img18.png" alt="Image 18" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img19.png" alt="Image 19" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img20.png" alt="Image 20" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img21.png" alt="Image 21" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img22.png" alt="Image 22" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img23.png" alt="Image 23" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img24.png" alt="Image 24" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img25.png" alt="Image 25" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Let’sEnable Active Directory Recycle Bin</p>
+<p>-Adds protection against accidental deletions</p>
+<p>-Can be done via PowerShell:</p>
+<p>Enable-ADOptionalFeature -Identity 'Recycle Bin Feature' -Scope ForestOrConfigurationSet -Target 'malcolmsoto.com'</p>
+<p>Setup a Group Policy to Enable Seamless SSO</p>
+<p>Open gpmc.ms</p>
+<p>Create a policy and link it to the OU</p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img26.png" alt="Image 26" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img27.png" alt="Image 27" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-entra-connect-setup/microsoft-entra-connect-setup-img28.png" alt="Image 28" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Go to https://admin.microsoft.com/Health </p> 
+<p> Directory sync status>Here you can check the status</p>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
