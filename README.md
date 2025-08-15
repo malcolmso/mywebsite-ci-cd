@@ -101,3 +101,4 @@ Your site updates instantly.
 - 🖼️ Avoid Snipping Tool black outlines — crop or clean images before saving
 - 🏷 Want to add categories, timestamps, or captions? The system is ready to expand
 
+
