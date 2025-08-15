@@ -1,0 +1,1 @@
+.\IntuneWinAppUtil.exe -c "C:\Miniconda" -s "install.ps1" -o "C:\Packages\Output"
