@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+  <h1>Deploy Mini Conda via Intune</h1>
+  <p>This guide walks you through packaging and deploying Miniconda silently via Microsoft Intune using Win32 apps.</p>
+
+  <section>
+    <h2>📦 Step 1: Download Miniconda Installer</h2>
+    <p>Get the latest Windows installer from <a href="https://www.anaconda.com/docs/getting-started/miniconda/install" target="_blank" rel="noopener">Anaconda's official site</a>.</p>
+    <p>Choose the <strong>.exe installer</strong> for 64-bit Windows.</p>
+  </section>
+
+  <section>
+    <h2>📁 Step 2: Grab My Repo</h2>
+    <p>Download the install and uninstall scripts from my GitHub repo.</p>
+    <p><a href="https://github.com/malcolmso/mywebsite-ci-cd/tree/main/Azure/Intune%20Apps/Miniconda" target="_blank" rel="noopener">My Github Repo</a></p></p>
+
+  </section>
+
+  <section>
+    <h2>🛠️ Step 3: Prepare the App for Intune</h2>
+    <p>Use the Microsoft Win32 Content Prep Tool to convert the installer folder into a <code>.intunewin</code> file.</p>
+    <p>Download from <a href="https://github.com/Microsoft/Microsoft-Win32-Content-Prep-Tool" target="_blank" rel="noopener">GitHub-Microsoft-Win32-Content-Prep-Tool</a></p>
+
+    
+    <p><em>Command Notes:</em></p>
+    <ul>
+      <li><code></code>.\IntuneWinAppUtil.exe -c "C:\Miniconda" -s "install.ps1" -o "C:\IntuneWinApp\Packages"</li>
+      <li><code>C =</code> Source folder containing installer and script</li>
+      <li><code>S =</code> Setup file (.ps1)</li>
+      <li><code>O =</code> Output folder for .intunewin</li>
+    </ul>
+
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img1.png" alt="Prep Tool Screenshot" />
+  </section>
+
+  <section>
+    <h2>📤 Step 4: Upload to Intune</h2>
+    <p>Go to <strong>Intune Admin Center > Apps > Windows apps > Create > Windows app (Win32)</strong></p>
+    <p>Upload the <code>install.intunewin</code> file.</p>
+
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img2.png" alt="Upload Step 1" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img3.png" alt="Upload Step 2" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img4.png" alt="Upload Step 3" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img5.png" alt="Upload Step 4" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img6.png" alt="Upload Step 5" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img7.png" alt="Upload Step 6" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img8.png" alt="Upload Step 7" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img9.png" alt="Upload Step 8" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img10.png" alt="Upload Step 9" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img11.png" alt="Upload Step 10" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img12.png" alt="Upload Step 11" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img13.png" alt="Upload Step 12" />
+
+    <ul>
+      <li><strong>Required</strong>: Installs automatically</li>
+      <li><strong>Available</strong>: User can install from Company Portal</li>
+      <li><strong>Uninstall</strong>: Removes the app from target users</li>
+    </ul>
+
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img14.png" alt="Install Behavior" />
+  </section>
+
+  <section>
+    <h2>🧪 Step 5: Test Deployment</h2>
+    <p>Assign the app to a test group and verify installation via Company Portal or automatic deployment.</p>
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img15.png" alt="Test Screenshot 1" />
+    <img src="../assets/images/deploy-mini-conda-via-intune/deploy-mini-conda-via-intune-img16.png" alt="Test Screenshot 2" />
+  </section>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
