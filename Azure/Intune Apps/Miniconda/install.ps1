@@ -1,5 +1,5 @@
 ﻿# ========================
-# Miniconda Silent Install for Intune with System PATH
+# Miniconda Silent Install for Intune with Detection Registry
 # ========================
 
 $Installer   = "Miniconda3-latest-Windows-x86_64.exe"
@@ -41,20 +41,28 @@ $pathsToAdd = @(
 try {
     $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
     $currentPath = (Get-ItemProperty -Path $regPath -Name Path).Path
+    $existingPaths = $currentPath -split ';' | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
+    $normalizedPaths = @{}
 
-    foreach ($p in $pathsToAdd) {
-        if ($currentPath -notlike "*$p*") {
-            $currentPath += ";$p"
-            Write-Log "Added $p to system PATH."
+    foreach ($p in $existingPaths) {
+        $normalizedPaths[$p.ToLower()] = $p
+    }
+
+    foreach ($newPath in $pathsToAdd) {
+        $key = $newPath.ToLower()
+        if (-not $normalizedPaths.ContainsKey($key)) {
+            $normalizedPaths[$key] = $newPath
+            Write-Log "Added $newPath to system PATH."
         } else {
-            Write-Log "$p already in system PATH."
+            Write-Log "$newPath already in system PATH."
         }
     }
 
-    Set-ItemProperty -Path $regPath -Name Path -Value $currentPath
+    $updatedPath = ($normalizedPaths.Values | Sort-Object) -join ';'
+    Set-ItemProperty -Path $regPath -Name Path -Value $updatedPath
     Write-Log "System PATH updated successfully."
 
-    # Broadcast environment change so CMD sees it immediately
+    # Broadcast environment change
     $signature = @"
     [DllImport("user32.dll", SetLastError = true)]
     public static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, UIntPtr wParam, string lParam,
@@ -74,12 +82,26 @@ try {
 Start-Sleep -Seconds 5
 
 # Verify installation
-if (Test-Path "$InstallPath\python.exe") {
-    Write-Log "Python detected at $InstallPath\python.exe"
+$pythonPath = "$InstallPath\python.exe"
+$condaPath  = "$InstallPath\condabin\conda.bat"
+
+if ((Test-Path $pythonPath) -and (Test-Path $condaPath)) {
+    Write-Log "Miniconda files detected."
+
+    # Create registry key for Intune detection
+    try {
+        $regKey = "HKLM:\Software\Miniconda3"
+        New-Item -Path $regKey -Force | Out-Null
+        New-ItemProperty -Path $regKey -Name "InstallPath" -Value $InstallPath -PropertyType String -Force | Out-Null
+        Write-Log "Detection registry key created."
+    } catch {
+        Write-Log "Failed to create detection registry key: $_"
+    }
+
     Write-Host "Miniconda install successful."
     exit 0
 } else {
-    Write-Log "ERROR: Python not found after install."
+    Write-Log "ERROR: Miniconda files missing after install."
     Write-Host "Miniconda install failed."
     exit 1
 }

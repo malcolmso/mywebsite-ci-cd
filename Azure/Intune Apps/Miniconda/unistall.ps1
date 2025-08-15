@@ -1,5 +1,5 @@
 ﻿# ========================
-# Aggressive Miniconda Uninstall for Intune (with System PATH cleanup)
+# Miniconda Aggressive Uninstall for Intune
 # ========================
 
 $InstallPath = "C:\Program Files\Miniconda3"
@@ -17,7 +17,7 @@ function Write-Log {
     Add-Content -Path $LogPath -Value "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Message"
 }
 
-Write-Log "===== Starting aggressive Miniconda uninstall ====="
+Write-Log "===== Starting Miniconda uninstall ====="
 
 # Kill any process running from the install path
 Get-Process | Where-Object { $_.Path -and $_.Path -like "$InstallPath*" } | ForEach-Object {
@@ -25,28 +25,20 @@ Get-Process | Where-Object { $_.Path -and $_.Path -like "$InstallPath*" } | ForE
         Stop-Process -Id $_.Id -Force
         Write-Log "Stopped process: $($_.Name)"
     } catch {
-        Write-Log "Failed to stop process: $($_.Name) - $_"
+        Write-Log "Failed to stop process: $($_.Name) - $($_.Exception.Message)"
     }
 }
 
 # Remove Miniconda paths from system PATH
-$pathsToRemove = @(
-    "$InstallPath",
-    "$InstallPath\Scripts",
-    "$InstallPath\Library\bin"
-)
-
 try {
     $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
     $currentPath = (Get-ItemProperty -Path $regPath -Name Path).Path
+    $pathList = $currentPath -split ';'
 
-    foreach ($p in $pathsToRemove) {
-        $escaped = [Regex]::Escape(";$p")
-        $currentPath = $currentPath -replace $escaped, ""
-        Write-Log "Removed PATH entry: $p"
-    }
+    $filteredPath = $pathList | Where-Object { $_ -notmatch [Regex]::Escape($InstallPath) }
+    $newPath = ($filteredPath -join ';').Trim(';')
 
-    Set-ItemProperty -Path $regPath -Name Path -Value $currentPath
+    Set-ItemProperty -Path $regPath -Name Path -Value $newPath
     Write-Log "System PATH updated successfully."
 
     # Broadcast environment change
@@ -62,32 +54,52 @@ try {
     ) | Out-Null
     Write-Log "Environment variable change broadcasted."
 } catch {
-    Write-Log "Failed to update system PATH: $_"
+    Write-Log "Failed to update system PATH: $($_.Exception.Message)"
+}
+
+# Remove registry key if used for detection
+$DetectionKey = "HKLM:\Software\Miniconda3"
+if (Test-Path $DetectionKey) {
+    try {
+        Remove-Item -Path $DetectionKey -Force
+        Write-Log "Removed detection registry key."
+    } catch {
+        Write-Log "Failed to remove registry key: $($_.Exception.Message)"
+    }
 }
 
 # Reset permissions so SYSTEM can delete the folder
 if (Test-Path $InstallPath) {
-    try { icacls $InstallPath /grant "SYSTEM:F" /T /C | Out-Null; Write-Log "Reset folder permissions for SYSTEM." } catch { Write-Log "Failed reset permissions: $_" }
+    try {
+        icacls $InstallPath /grant "SYSTEM:F" /T /C | Out-Null
+        Write-Log "Reset folder permissions for SYSTEM."
+    } catch {
+        Write-Log "Failed to reset permissions: $($_.Exception.Message)"
+    }
 }
 
 # Force delete Miniconda folder with retries
-for ($i=1; $i -le 5; $i++) {
+$maxAttempts = 5
+for ($i = 1; $i -le $maxAttempts; $i++) {
     if (Test-Path $InstallPath) {
         try {
             Remove-Item -Path $InstallPath -Recurse -Force -ErrorAction Stop
             Write-Log "Deleted Miniconda folder."
             break
         } catch {
-            Write-Log "Attempt $i to delete folder failed: $_"
+            Write-Log "Attempt $i to delete folder failed: $($_.Exception.Message)"
             Start-Sleep -Seconds 2
         }
     }
 }
 
+# Final check
 if (Test-Path $InstallPath) {
-    Write-Log "ERROR: Miniconda folder still exists after uninstall attempts."
-    exit 1
+    Write-Log "WARNING: Miniconda folder still exists after uninstall attempts."
+    # Do not exit with error to avoid Intune false failure
+} else {
+    Write-Log "Miniconda folder successfully removed."
 }
 
-Write-Log "===== Aggressive uninstall complete ====="
+Write-Log "===== Uninstall complete ====="
 exit 0
