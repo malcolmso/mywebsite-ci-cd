@@ -1,0 +1,275 @@
+\<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  
+<section style="max-width: 700px; margin: 0 auto; text-align: left;">
+  <h1>Device Write Back</h1>
+
+  <h2>What Is Device Writeback?</h2>
+  <p>
+    The point of device writeback is to bridge the gap between cloud-registered devices and on-premises Active Directory, 
+    enabling legacy systems and hybrid identity features to recognize and interact with those devices.
+  </p>
+  <p>
+    Device writeback allows Azure AD-registered devices (like those joined via Autopilot or Intune) to be written back 
+    into your on-premises Active Directory. This is useful for:
+  </p>
+  <ul>
+    <li>Windows Hello for Business (hybrid certificate trust)</li>
+    <li>Conditional Access via ADFS</li>
+    <li>Legacy apps that require on-prem AD computer objects</li>
+  </ul>
+
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>You must be using Microsoft Entra ID P1 or P2</li>
+    <li>Devices must be in the same forest as the users</li>
+    <li>Only one device registration configuration object is supported per forest</li>
+    <li>Azure AD Connect version 1.1.819.0 or newer is required</li>
+  </ul>
+</section>
+
+<section style="max-width: 700px; margin: 0 auto; text-align: left;">
+  <h2 style="text-align: center;">How to Enable Device Writeback</h2>
+  <ol style="padding-left: 1.5rem; margin-left: 0;">
+    <li>
+      Launch Azure AD Connect<br />
+      <img src="../assets/images/device-write-back/device-write-back-img1.png" alt="Image 1" />
+    </li>
+    <li>
+      Select “Configure device options”<br />
+      <img src="../assets/images/device-write-back/device-write-back-img2.png" alt="Image 2" />
+      <img src="../assets/images/device-write-back/device-write-back-img3.png" alt="Image 3" />
+      <img src="../assets/images/device-write-back/device-write-back-img4.png" alt="Image 4" />
+    </li>
+    <li>
+      Enable Device Writeback<br />
+      <img src="../assets/images/device-write-back/device-write-back-img5.png" alt="Image 5" />
+    </li>
+    <li>
+      Configure Hybrid Microsoft Entra ID Join<br />
+      <img src="../assets/images/device-write-back/device-write-back-img6.png" alt="Image 6" />
+      
+      <section style="max-width: 700px; margin: 0 auto; text-align: left;">
+        <h3>Configure Hybrid Microsoft Entra ID Join</h3>
+        <p>This option enables hybrid join, meaning:</p>
+        <ul>
+          <li>Devices joined to on-prem AD are automatically registered in Microsoft Entra ID (Azure AD)</li>
+          <li>Enables SSO, Conditional Access, and Intune enrollment for domain-joined machines</li>
+          <li>Required for group policy-based Autopilot deployments or co-management scenarios</li>
+        </ul>
+
+        <p>Use this when:</p>
+        <ul>
+          <li>You want on-prem AD devices to be visible in Entra ID</li>
+          <li>You’re managing devices with GPOs or SCCM</li>
+          <li>You’re enabling Intune auto-enrollment for domain-joined endpoints</li>
+        </ul>
+
+        <h3>Configure Device Writeback</h3>
+        <p>This does the reverse:</p>
+        <ul>
+          <li>Devices that are registered in Entra ID (like Autopilot or Intune-managed devices) get written back to on-prem AD</li>
+          <li>Creates a device object in AD under a specified OU</li>
+        </ul>
+
+        <p>Required for:</p>
+        <ul>
+          <li>Windows Hello for Business (certificate trust)</li>
+          <li>ADFS Conditional Access</li>
+          <li>Legacy apps that need AD device objects</li>
+        </ul>
+
+        <p>Use this when:</p>
+        <ul>
+          <li>You need cloud-joined devices to be recognized by on-prem AD</li>
+          <li>You’re deploying Windows Hello for Business hybrid cert trust</li>
+          <li>You’re using ADFS for Conditional Access</li>
+        </ul>
+      </section>
+    </li>
+    <li>
+      Configure Device Writeback<br />
+      <img src="../assets/images/device-write-back/device-write-back-img7.png" alt="Image 7" />
+      <ul>
+        <li>Cloud-joined devices are written back to on-prem AD</li>
+        <li>Creates device object in AD under a specified OU</li>
+        <li>Required for WHfB (cert trust), ADFS, legacy apps</li>
+      </ul>
+    </li>
+    <li>
+      Prepare Active Directory<br />
+      <img src="../assets/images/device-write-back/device-write-back-img8.png" alt="Image 8" />
+      <ul>
+        <li>Provide Enterprise Admin credentials to auto-configure</li>
+        <li>Or download PowerShell script to manually prep AD</li>
+      </ul>
+    </li>
+    <li>
+      Complete the Wizard<br />
+      <img src="../assets/images/device-write-back/device-write-back-img9.png" alt="Image 9" />
+      <img src="../assets/images/device-write-back/device-write-back-img10.png" alt="Image 10" />
+      <img src="../assets/images/device-write-back/device-write-back-img11.png" alt="Image 11" />
+      
+      <p><strong>Reference:</strong><br />
+        <a href="https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-device-writeback" target="_blank">
+          https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-device-writeback
+        </a>
+      </p>
+
+      <ul>
+        <li>Confirm the writeback forest and container</li>
+        <li>Finish configuration and verify sync status</li>
+      </ul>
+    </li>
+  </ol>
+</section>
+
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
