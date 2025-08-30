@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+<h1>Microsoft 365 Copilot – Environment Configuration and Compliance Enforcement</h1>
+<p>Microsoft 365 Copilot – Environment Configuration and Compliance Enforcement</p>
+<p>Overview</p>
+<p>This document outlines the configuration steps taken to prepare our Microsoft 365 environment for Copilot integration. It includes sensitivity label enforcement, Intune deployment, Conditional Access policies, and enterprise search connector setup. All actions were performed in alignment with project directives and compliance requirements.</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" />1. Go to <a href="https://admin.exchange.microsoft.com" target="_blank" rel="noopener">https://admin.exchange.microsoft.com</a></p>
+<p>Create a Mail Enabled Group “copilotUsers”</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>2. Create a New Sensitivity Label: "Copilot"</h2>
+<ul>
+  <li><strong>Label Scope:</strong> Files, Emails, Meetings</li>
+  <li><strong>Encryption:</strong> Enabled with assigned permissions</li>
+  <li><strong>Content Marking:</strong> Header, Footer, Watermark applied</li>
+  <li><strong>Teams Protection:</strong> Enabled (Teams Premium required)</li>
+  <li><strong>Auto-labeling:</strong> Optional toggle reviewed; policy not yet created</li>
+  <li><strong>Label Policy:</strong> Published to all users with mandatory labeling enforced</li>
+  <li><strong>Email Behavior:</strong> Inheritance from attachments enabled</li>
+  <li><strong>Purview Processing:</strong> Enabled for encrypted SharePoint/OneDrive content</li>
+</ul>
+<p>Go to <a href="https://purview.microsoft.com" target="_blank" rel="noopener">Purview Information Protection</a></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Sensitivity labels > Create a label</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img5.png" alt="Image 5" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img6.png" alt="Image 6" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img7.png" alt="Image 7" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img8.png" alt="Image 8" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img9.png" alt="Image 9" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" />Here add the Entra Group</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img10.png" alt="Image 10" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img11.png" alt="Image 11" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img12.png" alt="Image 12" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img13.png" alt="Image 13" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img14.png" alt="Image 14" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>Searched Sensitive Info Types</h2>
+<p>I searched for the following types of sensitive information:</p>
+<ul>
+  <li>Social Security numbers</li>
+  <li>Credit card numbers</li>
+  <li>Account numbers</li>
+  <li>General account identifiers</li>
+  <li>ABA routing numbers</li>
+  <li>Any other data you wouldn’t want exposed</li>
+</ul>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img15.png" alt="Image 15" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>
+  Here is the link: 
+  <a href="https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites#more-information-about-the-dependencies-for-the-unmanaged-devices-option" 
+     target="_blank" 
+     rel="noopener">
+    More information about the dependencies for the unmanaged devices option
+  </a>
+</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img16.png" alt="Image 16" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img17.png" alt="Image 17" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Copilot sensitivity label was successfully created</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img18.png" alt="Image 18" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" />Next Steps (from the confirmation screen)</p>
+<p>Publish the Label – Click DONE</p>
+<h2>Links from This Screen</h2>
+<ul>
+  <li>
+    <strong>Apply Sensitivity Label Automatically:</strong>
+    <a href="https://learn.microsoft.com/en-us/purview/apply-sensitivity-label-automatically" target="_blank" rel="noopener">
+      Microsoft Learn – Apply Sensitivity Label Automatically
+    </a>
+  </li>
+  <li>
+    <strong>Publish Sensitivity Labels by Creating a Label Policy:</strong>
+    <a href="https://learn.microsoft.com/en-us/purview/create-sensitivity-labels?tabs=classic-label-scheme#publish-sensitivity-labels-by-creating-a-label-policy" target="_blank" rel="noopener">
+      Microsoft Learn – Publish Sensitivity Labels via Label Policy
+    </a>
+  </li>
+</ul>
+
+<h3>Why I Selected “Publish Label to Users’ App”</h3>
+<p>
+Publishing the label ensures visibility and enforcement across supported applications, enabling consistent protection and user-driven classification. This step is essential for operationalizing the label within the user experience.
+</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img19.png" alt="Image 19" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img20.png" alt="Image 20" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>This screen confirms your Copilot sensitivity label is created, and now you're in the publishing workflow. This is where you make the label available to users and services across Microsoft 365.</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img21.png" alt="Image 21" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>This is the “Choose sensitivity labels to publish” step in the label policy wizard.</p>
+<p>Here's what to do next to lock in your Copilot label for enterprise use:</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img22.png" alt="Image 22" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img23.png" alt="Image 23" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" />Link: <a href="https://learn.microsoft.com/en-us/purview/purview-admin-units" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/purview/purview-admin-units</a></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img24.png" alt="Image 24" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img25.png" alt="Image 25" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img26.png" alt="Image 26" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>We are on the Policy Settings step of the label publishing wizard. This is where you define how strict or user friendly the Copilot label enforcement should be across apps like Outlook, Word, Excel, PowerPoint, and Power BI.</p>
+<p>For a financial grade deployment, here's what’s best:</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img27.png" alt="Image 27" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img28.png" alt="Image 28" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img29.png" alt="Image 29" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img30.png" alt="Image 30" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img31.png" alt="Image 31" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img32.png" alt="Image 32" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img33.png" alt="Image 33" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img34.png" alt="Image 34" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img35.png" alt="Image 35" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img36.png" alt="Image 36" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img37.png" alt="Image 37" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img38.png" alt="Image 38" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img39.png" alt="Image 39" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img40.png" alt="Image 40" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img41.png" alt="Image 41" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img42.png" alt="Image 42" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>Link: <a href="https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites#enable-this-preview-and-synchronize-labels</a></p>
+<p>3. Intune Deployment for Copilot Users</p>
+<p>App: Microsoft 365 Apps for Windows 10 and later</p>
+<p>Channel: Current Channel</p>
+<p>Format: Microsoft Office Open XML (.docx, .xlsx, .pptx)</p>
+<p>Assignment: Required install for Copilot Users group</p>
+<p>Security Baseline:Microsoft 365 Apps for Enterprise baseline deployed</p>
+<p>Intune Admin Center <a href="https://intune.microsoft.com" target="_blank" rel="noopener">https://intune.microsoft.com</a>→Apps→ Windows apps→ Create</p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img43.png" alt="Image 43" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img44.png" alt="Image 44" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img45.png" alt="Image 45" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img46.png" alt="Image 46" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img47.png" alt="Image 47" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img48.png" alt="Image 48" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img49.png" alt="Image 49" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img50.png" alt="Image 50" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>4. Conditional Access Enforcement</h2>
+<ul>
+  <li><strong>Group:</strong> Copilot Users (Security Group, Assigned Membership)</li>
+  <li><strong>Policy:</strong> "Copilot Users – Compliant Device Enforcement"</li>
+  <li><strong>Access Control:</strong> Require compliant device for Microsoft 365 access</li>
+  <li><strong>Security Defaults:</strong> Disabled to allow custom Conditional Access</li>
+  <li>
+    <strong>Configuration Portal:</strong> 
+    <a href="https://portal.azure.com/" target="_blank" rel="noopener">
+      Azure Portal
+    </a>
+  </li>
+</ul>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img51.png" alt="Image 51" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img52.png" alt="Image 52" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img53.png" alt="Image 53" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img54.png" alt="Image 54" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img55.png" alt="Image 55" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img56.png" alt="Image 56" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img57.png" alt="Image 57" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img58.png" alt="Image 58" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-365-copilot-environment-configuration-and-compliance-enforcement/microsoft-365-copilot-environment-configuration-and-compliance-enforcement-img59.png" alt="Image 59" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>✅ Deployment Summary: Copilot is Live</h2>
+
+<h3>Sensitivity Label</h3>
+<ul>
+  <li>Copilot label created and scoped across files, emails, Teams, SharePoint, Power BI</li>
+  <li>Published via label policy to the Copilot Users group</li>
+  <li>Mandatory labeling, inheritance, and justification all configured</li>
+  <li>✅ Enforcement perimeter is active</li>
+</ul>
+
+<h3>Microsoft 365 Apps Deployment</h3>
+<ul>
+  <li>Intune app suite configured with Current Channel, 64-bit, Open XML format</li>
+  <li>Assigned to Copilot Users group as required install</li>
+  <li>Security baseline applied for macro control, privacy, and telemetry</li>
+  <li>✅ Deployment created and ready to sync</li>
+</ul>
+
+<h3>Conditional Access</h3>
+<ul>
+  <li>Policy created: Copilot Users – Compliant Device Enforcement</li>
+  <li>Access control: Requires Intune-compliant device</li>
+  <li>Enabled and enforcing across Microsoft 365 apps</li>
+  <li>✅ Non-compliant devices are blocked</li>
+</ul>
+
+<h3>Compliance & Audit Readiness</h3>
+<ul>
+  <li>Activity Explorer and label analytics are optional and can be revisited later</li>
+  <li>Audit logs and DLP alerts are ready to be monitored</li>
+  <li>✅ Enforcement is visible and auditable</li>
+</ul>
+
+<h3>What You’ve Built</h3>
+<p>You didn’t just “set Copilot”—you engineered a secure, compliant, and fully scoped environment that:</p>
+<ul>
+  <li>Protects sensitive content</li>
+  <li>Enforces device trust</li>
+  <li>Deploys productivity tools with zero-touch precision</li>
+  <li>Aligns with real-world enterprise standards</li>
+</ul>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
