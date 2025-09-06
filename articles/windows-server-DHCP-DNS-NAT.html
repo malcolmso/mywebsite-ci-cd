@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+  <h1>Windows Server 2025: DHCP, DNS, and NAT Configuration</h1>
+  <h2>Overview</h2>
+  <p>
+    If you're building a self-contained Windows Server environment with one domain controller that handles 
+    Active Directory (AD), DHCP, DNS, NAT, and Group Policy, this guide walks you through every step. 
+    Whether you're setting up a test domain or a lightweight production backbone, this configuration gives 
+    you centralized identity, network services, and policy control — all from a single box.
+  </p>
+
+  <h2>What This Guide Covers</h2>
+  <ul>
+    <li>Installing and configuring Active Directory Domain Services (AD DS)</li>
+    <li>Setting up DNS for internal name resolution and forwarding</li>
+    <li>Deploying DHCP to assign IPs and network settings to clients</li>
+    <li>Enabling NAT to route internet access to internal devices</li>
+    <li>Creating and applying Group Policy Objects (GPOs) for centralized management</li>
+    <li>Verifying connectivity and client integration</li>
+  </ul>
+
+  <h2>Prerequisites</h2>
+  <ul>
+    <li>A hypervisor (e.g., Proxmox, Hyper-V, VMware)</li>
+    <li>Windows Server 2025 installed with two NICs:</li>
+    <ul>
+      <li>NIC 1: Internet-facing</li>
+      <li>NIC 2: Internal LAN</li>
+    </ul>
+    <li>Static IPs assigned to both NICs</li>
+    <li>Basic understanding of Windows Server roles and networking</li>
+  </ul>
+
+  <h2>Let's Get Started!</h2>
+  <p>Create a Linux Bridge</p>
+</article>
+<p><img src="../assets/images/overview/overview-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/overview/overview-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<section>
+  <h2>Network Configuration</h2>
+  <p>Assign a second network adapter to the server using the Linux bridge. This adapter will serve the internal LAN segment.</p>
+
+  <h2>DHCP Server Setup</h2>
+  <p>Install and configure the DHCP role to automatically assign IP addresses and network settings to connected clients.</p>
+
+  <h2>Configure IP and DNS</h2>
+  <p>Set a static IP and DNS server address on the newly added network adapter to establish internal routing and name resolution.</p>
+</section>
+<p><img src="../assets/images/overview/overview-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/overview/overview-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<article>
+  <h2>Install Roles and Features</h2>
+  <p>Click <strong>Add roles and features</strong> in Server Manager.</p>
+  <img src="../assets/images/overview/overview-img5.png" alt="Add Roles and Features" />
+
+  <p>Click <strong>Next</strong>.</p>
+  <img src="../assets/images/overview/overview-img6.png" alt="Wizard Introduction" />
+
+  <p>Select <strong>Role-based or feature-based installation</strong>.</p>
+  <img src="../assets/images/overview/overview-img7.png" alt="Installation Type" />
+
+  <p>Select your server, then click <strong>Next</strong>.</p>
+  <img src="../assets/images/overview/overview-img8.png" alt="Server Selection" />
+
+  <p>Select the following roles:</p>
+  <ul>
+    <li>DHCP Server</li>
+    <li>DNS Server</li>
+    <li>Remote Access</li>
+  </ul>
+  <img src="../assets/images/overview/overview-img9.png" alt="Role Selection" />
+
+  <p>Click <strong>Next</strong> through the feature and confirmation screens.</p>
+  <img src="../assets/images/overview/overview-img10.png" alt="Features" />
+  <img src="../assets/images/overview/overview-img11.png" alt="Confirmation" />
+  <img src="../assets/images/overview/overview-img12.png" alt="Remote Access Role Services" />
+
+  <p>Select <strong>Routing</strong>, then click <strong>Next</strong>.</p>
+  <img src="../assets/images/overview/overview-img13.png" alt="Routing Selection" />
+  <img src="../assets/images/overview/overview-img14.png" alt="Confirmation" />
+
+  <p>Click <strong>Install</strong>.</p>
+  <img src="../assets/images/overview/overview-img15.png" alt="Installation Progress" />
+
+  <p>Click <strong>Close</strong> when installation completes.</p>
+  <img src="../assets/images/overview/overview-img16.png" alt="Installation Complete" />
+
+  <h2>DHCP Setup</h2>
+  <p>Launch the DHCP post-install wizard.</p>
+  <img src="../assets/images/overview/overview-img17.png" alt="DHCP Wizard Start" />
+  <p>Click <strong>Next</strong>, then <strong>Commit</strong>.</p>
+  <img src="../assets/images/overview/overview-img18.png" alt="DHCP Commit" />
+  <img src="../assets/images/overview/overview-img19.png" alt="DHCP Complete" />
+
+  <p>Open the DHCP console.</p>
+  <img src="../assets/images/overview/overview-img20.png" alt="DHCP Console" />
+  <p>Confirm the binding is set to <strong>NIC #2</strong>.</p>
+
+  <p>Right-click <strong>IPv4</strong> and select <strong>New Scope</strong>.</p>
+  <img src="../assets/images/overview/overview-img21.png" alt="New Scope" />
+  <img src="../assets/images/overview/overview-img22.png" alt="Scope Wizard Start" />
+
+  <p>Name the scope and define the IP range and subnet mask.</p>
+  <img src="../assets/images/overview/overview-img23.png" alt="Scope Name" />
+  <img src="../assets/images/overview/overview-img24.png" alt="IP Range" />
+
+  <p>Click <strong>Next</strong> through the remaining steps.</p>
+  <img src="../assets/images/overview/overview-img25.png" alt="Exclusions" />
+  <img src="../assets/images/overview/overview-img26.png" alt="Lease Duration" />
+  <img src="../assets/images/overview/overview-img27.png" alt="Configure Options" />
+
+  <p>Add the router IP (e.g., <strong>10.0.0.1</strong>) and DNS server.</p>
+  <img src="../assets/images/overview/overview-img28.png" alt="Router Configuration" />
+  <img src="../assets/images/overview/overview-img29.png" alt="DNS Configuration" />
+
+  <p>Click <strong>Next</strong> and <strong>Finish</strong> to complete the scope setup.</p>
+  <img src="../assets/images/overview/overview-img30.png" alt="Scope Summary" />
+  <img src="../assets/images/overview/overview-img31.png" alt="Activate Scope" />
+  <img src="../assets/images/overview/overview-img32.png" alt="Finish Scope Wizard" />
+  <img src="../assets/images/overview/overview-img33.png" alt="DHCP Setup Complete" />
+
+  <h2>Routing and Remote Access Setup</h2>
+  <p>Open <strong>Routing and Remote Access</strong>.</p>
+  <img src="../assets/images/overview/overview-img34.png" alt="RRAS Console" />
+
+  <p>Right-click the server and select <strong>Configure and Enable Routing and Remote Access</strong>.</p>
+  <img src="../assets/images/overview/overview-img35.png" alt="RRAS Wizard Start" />
+  <img src="../assets/images/overview/overview-img36.png" alt="RRAS Wizard Next" />
+
+  <p>Select <strong>NAT</strong> and choose the correct NIC.</p>
+  <img src="../assets/images/overview/overview-img37.png" alt="NAT Selection" />
+  <img src="../assets/images/overview/overview-img38.png" alt="NIC Selection" />
+  <img src="../assets/images/overview/overview-img39.png" alt="Finish RRAS Setup" />
+  <img src="../assets/images/overview/overview-img40.png" alt="RRAS Summary" />
+
+  <h3>Firewall Configuration</h3>
+  <p>If you encounter a firewall error, apply the necessary rule changes.</p>
+  <img src="../assets/images/overview/overview-img41.png" alt="Firewall Error" />
+  <img src="../assets/images/overview/overview-img42.png" alt="Firewall Rule 1" />
+  <img src="../assets/images/overview/overview-img43.png" alt="Firewall Rule 2" />
+  <img src="../assets/images/overview/overview-img44.png" alt="Firewall Rule 3" />
+  <img src="../assets/images/overview/overview-img45.png" alt="Firewall Rule 4" />
+  <img src="../assets/images/overview/overview-img46.png" alt="Firewall Rule 5" />
+
+  <h2>Validation</h2>
+  <p>On your desktop client, confirm DHCP IP assignment, DNS resolution, and internet access.</p>
+  <img src="../assets/images/overview/overview-img47.png" alt="Client Confirmation" />
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
