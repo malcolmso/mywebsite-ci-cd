@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+  <h1>Terraform on Windows</h1>
+
+  <section>
+    <h2>What Is Terraform?</h2>
+    <p>
+      Terraform is an open-source <strong>Infrastructure as Code (IaC)</strong> tool developed by HashiCorp.
+      It lets you define, provision, and manage cloud infrastructure using declarative configuration files
+      written in <strong>HCL (HashiCorp Configuration Language)</strong>.
+    </p>
+    <p>With Terraform, you can:</p>
+    <ul>
+      <li>Spin up cloud resources (VMs, networks, databases) across providers like AWS, Azure, GCP</li>
+      <li>Version-control infrastructure like code</li>
+      <li>Preview changes before applying them (<code>terraform plan</code>)</li>
+      <li>Automate deployments and reduce manual setup</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How to Install Terraform on Windows</h2>
+
+    <h3>Step 1: Download Terraform</h3>
+    <p>
+      Go to
+      <a href="https://developer.hashicorp.com/terraform/install" target="_blank" rel="noopener">
+        https://developer.hashicorp.com/terraform/install
+      </a>
+    </p>
+    <p>Choose <strong>Windows</strong> → Select your system architecture (usually <code>AMD64</code>)</p>
+    <p>Download the <code>.zip</code> file:</p>
+    <img
+      src="../assets/images/terraform-on-windows/terraform-on-windows-img1.png"
+      alt="Terraform download page"
+      style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;"
+    />
+  </section>
+</article>
+<section>
+  <h3>Step 2: Extract the Files</h3>
+  <p>Create a folder such as <code>C:\terraform</code> to store the Terraform binary.</p>
+  <p>Extract the contents of the downloaded <code>.zip</code> file into this folder.</p>
+  <p>After extraction, you should see <code>terraform.exe</code> inside the folder.</p>
+  <img
+    src="../assets/images/terraform-on-windows/terraform-on-windows-img2.png"
+    alt="Extracted terraform.exe in folder"
+    style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;"
+  />
+</section>
+<section>
+  <h3>Step 3: Add Terraform to System PATH</h3>
+  <p>To make Terraform accessible from any terminal window, you’ll need to add its folder to your system PATH.</p>
+  <p>Start by opening the <strong>Start Menu</strong> and searching for <em>Environment Variables</em> Click <strong>Edit the system environment variables</strong>.</p>
+  <p>In the <strong>System Properties</strong> window, click <strong>Environment Variables</strong>.</p>
+  <p>Under <strong>System Variables</strong>, find <code>Path</code> and click <strong>Edit</strong>.</p>
+  <p>Click <strong>New</strong> and add: <code>C:\terraform</code></p>
+  <p>Click <strong>OK</strong> to save and close all dialogs.</p>
+  <img
+    src="../assets/images/terraform-on-windows/terraform-on-windows-img3.png"
+    alt="Adding Terraform folder to Windows PATH"
+    style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;"
+  />
+</section>
+<section>
+  <h3>Step 4: Verify Installation</h3>
+  <p>Open <strong>Command Prompt</strong> or <strong>PowerShell</strong> and run:</p>
+  <pre><code>terraform -version</code></pre>
+  <img
+    src="../assets/images/terraform-on-windows/terraform-on-windows-img4.png"
+    alt="Terraform version output in terminal"
+    style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;"
+  />
+  <p>You should see the installed version number. If so, you're good to go!</p>
+</section>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
