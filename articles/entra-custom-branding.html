@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+ <article>
+    <h1>Entra Custom Branding</h1>
+
+   
+    <p>Branding your Microsoft Entra ID sign-in experience isn’t just about aesthetics—it’s a strategic move that strengthens user trust, security posture, and phishing resistance.</p>
+
+    <p><strong>Here's why it's smart:</strong></p>
+
+    <h2>Security Benefits of Custom Branding</h2>
+
+    <ul class="benefits">
+      <li>
+        <strong>Reduces Phishing Risk:</strong>
+        Attackers often mimic Microsoft’s default login pages to trick users into entering credentials. A custom-branded sign-in page makes it easier for users to spot fakes—because they’re trained to expect your logo, colors, and layout.
+      </li>
+      <li>
+        <strong>Boosts User Confidence:</strong>
+        When users see familiar branding (like <em>your logo</em> or even a Shih Tzu watermark), they feel reassured that they’re logging into a legitimate system. That trust reduces hesitation and improves adoption.
+      </li>
+      <li>
+        <strong>Supports Security Awareness Training:</strong>
+        You can use branding as part of your internal security messaging. For example, include a footer like: <em>“If this page doesn’t look like this, don’t sign in—report it.”</em>
+      </li>
+    </ul>
+
+    <p><strong>Go from this:</strong></p>
+
+
+<p><img src="../assets/images/entra-custom-branding/entra-custom-branding-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><strong>To this:</strong></p>
+<p><img src="../assets/images/entra-custom-branding/entra-custom-branding-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>Step-by-Step Setup</h2>
+
+<p>
+  Sign in to 
+  <a href="https://entra.microsoft.com/" target="_blank" rel="noopener">
+    entra.microsoft.com
+  </a> 
+  using a Global Admin account.
+</p>
+
+<p>
+  Navigate to: <strong>Identity → User experiences → Company branding</strong>
+</p>
+
+
+<p><img src="../assets/images/entra-custom-branding/entra-custom-branding-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p>
+  Click <strong>Customize</strong> under the default sign-in experience.
+</p>
+
+<img 
+  src="../assets/images/entra-custom-branding/entra-custom-branding-img4.png" 
+  alt="Customize option in Entra branding settings" 
+  style="max-width:600px; display:block; margin:1rem auto; border-radius:8px;" 
+/>
+
+
+<h2>Upload Your Branding Assets</h2>
+
+<ul style="list-style-type: none; padding-left: 0;">
+  <li>
+    <strong>Favicon:</strong>  
+    A tiny icon that appears in the browser tab—like your brand’s digital fingerprint. Helps users instantly recognize your site.
+  </li>
+
+  <li>
+    <strong>Background Image:</strong>  
+    The large image behind the sign-in box. Sets the visual tone—can be sleek, scenic, or even include a subtle mascot watermark.
+  </li>
+
+  <li>
+    <strong>Logos (Header, Banner, Square):</strong>
+    <ul>
+      <li><strong>Header Logo:</strong> Appears at the top of the sign-in box. Best for horizontal logos.</li>
+      <li><strong>Banner Logo:</strong> Used in some layouts—similar to header but with more space.</li>
+      <li><strong>Square Logo:</strong> Shows up in places like consent prompts and mobile views. Good for icons or mascots.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Set Background Color:</strong>  
+    A fallback color if the image doesn’t load. Also used in minimal layouts. Choose something that complements your logo.
+  </li>
+
+  <li>
+    <strong>Choose Layout (Full-screen or Partial):</strong>
+    <ul>
+      <li><strong>Full-screen:</strong> Background image fills the entire screen—great for immersive branding.</li>
+      <li><strong>Partial:</strong> Sign-in box sits beside a smaller image—more compact and cleaner.</li>
+    </ul>
+  </li>
+
+  <li>
+    <strong>Optional: Add Header/Footer Text:</strong>  
+    Custom messages like “Welcome to Malcolm Soto’s workspace” or security reminders like “If this page looks different, don’t sign in.”
+  </li>
+</ul>
+
+<article>
+  <p><strong>For my case:</strong> I selected <em>Background Image</em>.</p>
+
+  <div style="text-align: center;">
+    <img 
+      src="../assets/images/entra-custom-branding/entra-custom-branding-img5.png" 
+      alt="Background image selection in Entra branding" 
+      style="max-width:600px; display:block; margin:1rem auto; border-radius:8px;" 
+    />
+
+    <img 
+      src="../assets/images/entra-custom-branding/entra-custom-branding-img6.png" 
+      alt="Preview of branded sign-in page" 
+      style="max-width:600px; display:block; margin:1rem auto; border-radius:8px;" 
+    />
+  </div>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
