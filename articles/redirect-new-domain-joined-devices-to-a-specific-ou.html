@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:malcolmittech@gmail.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+  <h1>Redirect New Domain-Joined Devices to a Specific OU</h1>
+
+  <section>
+    <h2>Purpose</h2>
+    <p>
+      By default, when a new computer is joined to an Active Directory domain, it lands in the <strong>“Computers”</strong> container at the root of the domain. This default behavior doesn’t align with environments that use scoped OU syncing (e.g., Azure AD Connect) or structured device management.
+    </p>
+    <p>
+      This guide shows how to redirect new domain-joined devices to a custom OU — in this case: <code>OU=Computers,OU=Houston,OU=Malcolm-Lab,DC=malcolmsoto,DC=com</code>.
+    </p>
+    <p>
+      When I join a new computer to the domain, I want it to be moved to a specific OU. By default, it goes to the <strong>“Computers”</strong> container.
+    </p>
+  </section>
+</article>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<section>
+  <h2>Steps to Redirect the Default Join Location</h2>
+
+  <div class="step">
+    <h3>Step 1: Log into a Domain Controller</h3>
+    <p>Use an account with <strong>Domain Admin</strong> privileges.</p>
+    <p>Open <strong>Command Prompt</strong> as Administrator.</p>
+  </div>
+
+  <div class="step">
+    <h3>Step 2: Run the <code>redircmp</code> Command</h3>
+    <p>You’ll need the full Distinguished Name (DN) format for the target OU. Here’s an example:</p>
+    <div style="max-width: 600px; margin: 0 auto;">
+      <textarea readonly rows="2" style="width:100%; font-family:monospace; resize:none;">redircmp "OU=Computers,OU=Houston,OU=Malcolm-Lab,DC=malcolmsoto,DC=com"</textarea>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3>Step 3: Verify the Redirection</h3>
+    <p>After joining a new computer to the domain, confirm its placement with:</p>
+    <div style="max-width: 600px; margin: 0 auto;">
+      <textarea readonly rows="2" style="width:100%; font-family:monospace; resize:none;">Get-ADComputer -Identity "NewPCName" | Select DistinguishedName</textarea>
+    </div>
+  </div>
+</section>
+
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<div class="step">
+  <h3>Step 4: Test the Redirection</h3>
+  <p>Join a new PC to the domain and verify its placement.</p>
+</div>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img5.png" alt="Image 5" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<div class="step">
+  <h3>Verify with PowerShell</h3>
+  <p>You can run a PowerShell command to confirm the computer's placement in Active Directory:</p>
+  <div style="max-width: 600px; margin: 0 auto;">
+    <textarea readonly rows="2" style="width:100%; font-family:monospace; resize:none;">Get-ADComputer -Identity "NewPCName" | Select DistinguishedName</textarea>
+  </div>
+</div>
+
+<div class="step">
+  <h3>Force a Delta Sync (Entra ID)</h3>
+  <p>If you're using Entra ID with Azure AD Connect, you can manually trigger a delta sync to push recent changes:</p>
+  <div style="max-width: 600px; margin: 0 auto;">
+    <textarea readonly rows="2" style="width:100%; font-family:monospace; resize:none;">Start-ADSyncSyncCycle -PolicyType Delta</textarea>
+  </div>
+</div>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img6.png" alt="Image 6" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/redirect-new-domain-joined-devices-to-a-specific-ou/redirect-new-domain-joined-devices-to-a-specific-ou-img7.png" alt="Image 7" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<div class="step">
+  <h3>Additional Notes</h3>
+  <ul style="max-width: 700px; margin: 0 auto; padding-left: 20px;">
+    <li>This change only affects <strong>new domain joins</strong>. Existing devices must be moved manually to the target OU.</li>
+    <li>Ensure your <strong>Azure AD Connect sync scope</strong> includes the target OU so hybrid join and Intune policies apply correctly.</li>
+    <li>For structured environments, consider redirecting based on <strong>naming conventions</strong> or <strong>site codes</strong> using automation.</li>
+  </ul>
+</div>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
