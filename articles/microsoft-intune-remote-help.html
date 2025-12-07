@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malcolm Soto – Article</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #121212;
+      --text-light: #000000;
+      --text-dark: #f0f0f0;
+      --button-light: #1e90ff;
+      --button-dark: #4c9aff;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      text-align: center;
+      padding: 2rem 1rem;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    [data-theme="dark"] body {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h3 { margin-bottom: 0.3rem; }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto 1rem auto;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--button-light);
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] a {
+      color: var(--button-dark);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: var(--button-light);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .button {
+      background-color: var(--button-dark);
+      color: white;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      margin-top: 4rem;
+      color: gray;
+    }
+
+    img {
+      max-width: 600px;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      border-radius: 8px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    main ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+      text-align: left;
+    }
+
+    main li {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+
+    [data-theme="dark"] main li {
+      background-color: #1e1e1e;
+    }
+
+    main li:hover {
+      background-color: #e6f0ff;
+    }
+
+    [data-theme="dark"] main li:hover {
+      background-color: #2a3c55;
+    }
+
+    main a {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--button-light);
+    }
+
+    [data-theme="dark"] main a {
+      color: var(--button-dark);
+    }
+
+    main em {
+      display: block;
+      margin-top: 0.4rem;
+      color: #555;
+      font-style: normal;
+    }
+
+    [data-theme="dark"] main em {
+      color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      .toggle {
+        top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleIcon(newTheme);
+    };
+
+    const updateToggleIcon = (theme) => {
+      const btn = document.getElementById("themeToggle");
+      btn.textContent = theme === "dark" ? "🌙" : "🌞";
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+    });
+  </script>
+
+  <button class="toggle" id="themeToggle" onclick="toggleTheme()">🌞</button>
+
+  <nav>
+    <a href="../index.html" class="button">Home</a>
+    <a href="../blog.html" class="button">Blog</a>
+    <a href="../s3cret-lab.html" class="button">The S3cret Lab 🧪</a>
+    <a href="mailto:admin@malcolmsoto.com" class="button">Contact</a>
+    <a href="https://www.linkedin.com/in/malcolm-soto/" target="_blank" class="button">LinkedIn</a>
+  </nav>
+
+  <main>
+
+<article>
+  <h1>Microsoft Intune Remote Help</h1>
+  <p>Microsoft Intune Remote Help provides secure assistance for managed devices.</p>
+
+  <p>To use Microsoft Intune Remote Help, you need a valid Remote Help license, Intune tenant configuration, Microsoft Entra ID authentication, and proper role-based access control (RBAC) assignments. Both helpers (support staff) and sharers (end users) must sign in with organizational accounts.</p>
+
+  <h2>Key Prerequisites for Intune Remote Help</h2>
+
+  <h3>1. Licensing</h3>
+  <ul>
+    <li>Remote Help is a paid add-on to Microsoft Intune.</li>
+    <li>Licenses must be purchased and assigned to both helpers (support staff) and sharers (end users).</li>
+  </ul>
+
+  <h3>2. Tenant Configuration</h3>
+  <ul>
+    <li>Remote Help must be enabled in the Intune tenant.</li>
+    <li>Once enabled, it applies tenant-wide (cannot be scoped to specific groups).</li>
+    <li>Remote Help is part of the Intune Suite add-on capabilities.</li>
+  </ul>
+
+  <h3>3. Authentication</h3>
+  <ul>
+    <li>Both helpers and sharers must sign in using Microsoft Entra ID (Azure AD) organizational accounts.</li>
+    <li>This prevents impersonation and ensures secure, authenticated sessions.</li>
+  </ul>
+
+  <h3>4. Role-Based Access Control (RBAC)</h3>
+  <ul>
+    <li>Helpers must be assigned the Remote Help permissions via Intune RBAC.</li>
+    <li>RBAC defines who can provide support and what level of access they have (view-only vs. full control).</li>
+  </ul>
+
+  <h3>5. Device Requirements</h3>
+  <ul>
+    <li>Remote Help works with Intune-enrolled devices.</li>
+    <li>Optionally, admins can enable support for unenrolled devices (useful for BYOD scenarios).</li>
+    <li>Supported platforms include Windows 10/11 devices managed by Intune.</li>
+  </ul>
+
+  <h3>6. Network & Security</h3>
+  <ul>
+    <li>Remote Help requires internet connectivity to Microsoft cloud services.</li>
+    <li>Ensure firewall/proxy settings allow communication with Remote Help endpoints.</li>
+    <li>Sessions are encrypted end-to-end for compliance and security.</li>
+  </ul>
+
+  <h2>Network Considerations</h2>
+<p>
+  Both the helpdesk and the end user must be able to reach specific endpoints over port 443.
+  For more information, see
+  <a href="https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/intune-endpoints" target="_blank" rel="noopener">
+    Network endpoints for Remote Help
+  </a>.
+</p>
+
+<p>
+  Remote Help communicates over port 443 (HTTPS) and connects to the Remote Assistance Service at
+  <a href="https://remotehelp.microsoft.com" target="_blank" rel="noopener">remotehelp.microsoft.com</a>
+  using the Remote Desktop Protocol (RDP). All traffic is encrypted with TLS&nbsp;1.2.
+</p>
+
+<h2>Test Network Access using PowerShell</h2>
+<ul>
+  <li><code>Test-NetConnection remotehelp.microsoft.com -Port 443</code></li>
+</ul>
+
+<h2>Reference Documentation</h2>
+<ul>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/remote-help?tabs=windows" target="_blank" rel="noopener">
+      Microsoft Intune Remote Help overview
+    </a>
+  </li>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/remote-help-deploy?tabs=windows" target="_blank" rel="noopener">
+      Deploying Remote Help with Microsoft Intune
+    </a>
+  </li>
+</ul>
+<h2>Implementation Steps</h2>
+
+<h3>1. Setting up Remote Help</h3>
+<ul>
+  <li>Log in to <a href="https://intune.microsoft.com" target="_blank" rel="noopener">intune.microsoft.com</a>.</li>
+  <li>Navigate to <strong>Tenant administration</strong>.</li>
+  <li>Select <strong>Intune add-ons</strong>.</li>
+  <li>Click <strong>View details</strong> for the <em>Remote Help</em add-on.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img1.png" alt="Image 1" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img2.png" alt="Image 2" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>Trial Behavior</h2>
+<ul>
+  <li>When you start a trial (usually 30 days), you get full access to the add on features for the users you assign.</li>
+  <li>At the end of the trial, it does not automatically convert to paid unless you explicitly purchase licenses and assign them.</li>
+  <li>If you don’t buy licenses, the features simply stop working once the trial expires.</li>
+  <li>Microsoft will usually notify you in the Microsoft 365 admin center before the trial ends, giving you the option to convert to paid.</li>
+</ul>
+
+<h2>What to Expect</h2>
+<ul>
+  <li>No surprise billing — you must actively purchase licenses to continue.</li>
+  <li>If you decide to keep the add on, you can assign licenses to specific users (e.g., only your support staff for Remote Help).</li>
+  <li>If you don’t, the trial just lapses and the features are disabled.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img3.png" alt="Image 3" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img4.png" alt="Image 4" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img5.png" alt="Image 5" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img6.png" alt="Image 6" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Add your user</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img7.png" alt="Image 7" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img8.png" alt="Image 8" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Note: Activating licenses or starting a trial may take anywhere from 30 minutes to 8 hours.</li>
+<li>Go back to the Intune Add-on page, and click refresh, look at the Remote Help addon, then Click Remote Help</li>
+</ul>
+<img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img9.png" alt="Image 9" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Click Settings > Configure</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img10.png" alt="Image 10" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img11.png" alt="Image 11" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img12.png" alt="Image 12" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>We have successfully enabled Remote Help.</li>
+<li>The next step involves configuring permissions for Remote Help by defining roles.</li>
+<li>Click Roles</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img13.png" alt="Image 13" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>The Help Desk Operator is a built-in role in Intune, designed for individuals providing assistance with Remote Help, also known as helpers.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img14.png" alt="Image 14" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>But for Least Privilege, let’s make a custom role.</li>
+<li>Click create > Intune role</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img15.png" alt="Image 15" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Give it a Name and Description</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img16.png" alt="Image 16" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Here we can setparameters and define the actions helpdesk associates can take during a Remote Help session, based on their roles.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img17.png" alt="Image 17" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Set the <strong>Elevation</strong> toggle to <strong>Yes</strong>.</li>
+<li>Setting the Elevation toggle to Yes enables the helper to input UAC credentials when prompted on the sharer's windows devices during a Remote Help session.Additionally, enabling elevation grants the helper the ability to view and control the sharer's device, provided the sharer has given access.</li>
+<li>Set the <strong>View screen</strong> toggle to <strong>Yes</strong>.</li>
+<li>View screen toggle to Yes grants the helper access to view the sharer's device when Remote Help is active across all supported platforms.</li>
+<li>Set the <strong>Unattended control</strong> toggle to <strong>Yes</strong>.</li>
+<li>Setting the Unattended control toggle to Yes allows Remote Help to start automatically on Android devices as soon as the helper initiates a new session, eliminating the need for the sharer to grant access.</li>
+<li>Set the <strong>Take full control</strong> toggle to <strong>Yes</strong>.</li>
+<li>Setting the Take full control toggle to Yes allows the helper to view and control the sharer's device when Remote Help is activated on all platforms supported by Microsoft Remote Help.</li>
+</ul>
+<img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img18.png" alt="Image 18" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img19.png" alt="Image 19" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img20.png" alt="Image 20" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Click on the Custom Intune role we created</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img21.png" alt="Image 21" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Click Assignments > Assign</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img22.png" alt="Image 22" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Give it a name, then Next</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img23.png" alt="Image 23" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>Select Add groups. Admin Group users act as helpers and have access to the permissions defined for this role.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img24.png" alt="Image 24" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img25.png" alt="Image 25" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+  <li>Click Next</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img26.png" alt="Image 26" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<ul>
+<li>In this setup, I am adding all users and devices, but for enterprise environments we would use groups to target the help desk scope.</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img27.png" alt="Image 27" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img28.png" alt="Image 28" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img29.png" alt="Image 29" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img30.png" alt="Image 30" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h3>2. Configure the Remote Help app</h3>
+<ul>
+  <li>Download Remote Help from the link below:</li>
+  <li>
+    <a href="https://learn.microsoft.com/en-us/intune/intune-service/fundamentals/remote-help-deploy?tabs=windows#download-remote-help-apps" 
+       target="_blank" rel="noopener">
+      Download Remote Help apps (Microsoft Learn)
+    </a>
+  </li>
+  <li>Package it for Intune</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img31.png" alt="Image 31" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h3>3. Deploy the Remote Help app</h3>
+<ul>
+<li>Go to Intune > Apps > All Apps > Create</li>
+</ul>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img32.png" alt="Image 32" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img33.png" alt="Image 33" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img34.png" alt="Image 34" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img35.png" alt="Image 35" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img36.png" alt="Image 36" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img37.png" alt="Image 37" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img38.png" alt="Image 38" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img39.png" alt="Image 39" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img40.png" alt="Image 40" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img41.png" alt="Image 41" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img42.png" alt="Image 42" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img43.png" alt="Image 43" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h3>4. Start Remote Help</h3>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img44.png" alt="Image 44" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img45.png" alt="Image 45" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img46.png" alt="Image 46" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img47.png" alt="Image 47" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<p><img src="../assets/images/microsoft-intune-remote-help/microsoft-intune-remote-help-img48.png" alt="Image 48" style="max-width:600px;display:block;margin:1rem auto;border-radius:8px;" /></p>
+<h2>Complete the Setup</h2>
+<p>
+  Remote Help empowers both small businesses and enterprises to provide secure, scalable remote support. 
+  Once the setup is complete, your team can assist users efficiently across devices and locations, 
+  ensuring productivity and confidence at scale.
+</p>
+</article>
+</main>
+<footer>
+  <p>© 2025 Malcolm Soto | AWS Certified Consultant | Houston, TX</p>
+  <p>Hosted in: <strong>AWS CloudFront</strong></p>
+</footer>
+</body>
+</html>
